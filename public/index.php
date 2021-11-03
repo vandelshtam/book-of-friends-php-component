@@ -48,7 +48,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/public/index.php/register', ['App\controllers\UserController','register']);
     $r->addRoute('GET', '/public/index.php/verification', ['App\controllers\UserController','email_verification']);
     $r->addRoute('POST', '/public/index.php/verification', ['App\controllers\UserController','email_verification']);
-    $r->addRoute('GET', '/public/index.php/login', ['App\controllers\UserController','login']);
+    $r->addRoute('GET', '/index.php/login', ['App\controllers\UserController','login']);
     $r->addRoute('POST', '/public/index.php/login', ['App\controllers\UserController','login']);
     $r->addRoute('GET', '/public/index.php/logout', ['App\controllers\UserController','logout']);
     $r->addRoute('GET', '/public/index.php/status/{id:\d+}', ['App\controllers\HomeController','status']);

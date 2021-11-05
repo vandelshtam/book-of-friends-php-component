@@ -30,8 +30,8 @@
                     <div class="d-flex align-items-center container p-0">
                         <div class="page-logo width-mobile-auto m-0 align-items-center justify-content-center p-0 bg-transparent bg-img-none shadow-0 height-9 border-0">
                             <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
-                                <img src="/php/lessons_php/module_2/module_2_training_project/app/views/img/logo.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
-                                <span class="page-logo-text mr-1">Учебный проект</span>
+                                <img src="/book-of-friends-php-component/app/views/img/type2.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
+                                <span class="page-logo-text mr-1">About</span>
                             </a>
                         </div>
                         <span class="text-white opacity-50 ml-auto mr-2 hidden-sm-down">

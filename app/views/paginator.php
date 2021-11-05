@@ -3,10 +3,11 @@ $this->layout('layout', ['title' => 'List all users']);
 $pdo = new PDO("mysql:host=localhost:8889; dbname=app3; charset=utf8;","root","root");
 $auth = new \Delight\Auth\Auth($pdo);
 ?>
+    <main id="js-page-content" role="main" class="page-content mt-3">
             <div class="row">
                 <div class="col-xl-12">
                     <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER)):?>
-                    <a class="btn btn-success" href="/php/lessons_php/module_2/module_2_training_project/public/index.php/addUser">Добавить</a>
+                    <a class="btn btn-success" href="/book-of-friends-php-component/addUser">Добавить</a>
                     <?php endif;?>
                     <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
                         <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
@@ -53,30 +54,30 @@ $auth = new \Delight\Auth\Auth($pdo);
                                     <?php if($auth->isLoggedIn()):?>
                                         
                                                <div class="dropdown-menu">
-                                               <a class="dropdown-item" href="/php/lessons_php/module_2/module_2_training_project/public/index.php/page_profile/<?=$user['id'];?>">
+                                               <a class="dropdown-item" href="/book-of-friends-php-component/page_profile/<?=$user['id'];?>">
                                                 <i class="fa fa-edit"></i>
                                                 Открыть профиль</a> 
                                                 <?php endif;?> 
                                                 <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER)):?> 
-                                                <a class="dropdown-item" href="/php/lessons_php/module_2/module_2_training_project/public/index.php/roles/<?=$user['id'];?>">
+                                                <a class="dropdown-item" href="/book-of-friends-php-component/roles/<?=$user['id'];?>">
                                                 <i class="fa fa-edit"></i>
                                                 Управлять ролями</a>
                                                 <?php endif;?>
                                                 <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER) OR $auth->getUsername()==$user['username']):?> 
-                                                <a class="dropdown-item" href="/php/lessons_php/module_2/module_2_training_project/public/index.php/edit_user/<?=$user['id'];?>">
+                                                <a class="dropdown-item" href="/book-of-friends-php-component/edit_user/<?=$user['id'];?>">
                                                 <i class="fa fa-edit"></i>
                                                 Редактировать</a>
-                                                <a class="dropdown-item" href="/php/lessons_php/module_2/module_2_training_project/public/index.php/security_admin/<?=$user['id'];?>">
+                                                <a class="dropdown-item" href="/book-of-friends-php-component/security_admin/<?=$user['id'];?>">
                                                 <i class="fa fa-lock"></i>
                                                 Безопасность</a>
-                                                <a class="dropdown-item" href="/php/lessons_php/module_2/module_2_training_project/public/index.php/status/<?=$user['id'];?>">
+                                                <a class="dropdown-item" href="/book-of-friends-php-component/status/<?=$user['id'];?>">
                                                 <i class="fa fa-sun"></i>
                                                 Установить статус</a>
-                                                <a class="dropdown-item" href="/php/lessons_php/module_2/module_2_training_project/public/index.php/load_avatar/<?=$user['id'];?>">
+                                                <a class="dropdown-item" href="/book-of-friends-php-component/load_avatar/<?=$user['id'];?>">
                                                 <i class="fa fa-camera"></i>
                                                 Управлять аватаром
                                                 </a>
-                                                <a href="/php/lessons_php/module_2/module_2_training_project/public/index.php/delete/<?=$user['id']?>" class="dropdown-item" onclick="return confirm(\'are you sure?\');">
+                                                <a href="/book-of-friends-php-component/delete/<?=$user['id']?>" class="dropdown-item" onclick="return confirm(\'are you sure?\');">
                                                 <i class="fa fa-window-close"></i>
                                                 Удалить
                                                 </a>   
@@ -118,11 +119,11 @@ $auth = new \Delight\Auth\Auth($pdo);
                                         <i class='subheader-icon fal fa-users'></i> 
                                         Информация для зарегистрированных пользователей   
                                         </h6>
-                                        <a href="/php/lessons_php/module_2/module_2_training_project/public/index.php/login" class="btn-link text-white ml-auto ml-sm-0">
+                                        <a href="/book-of-friends-php-component/app/views/login" class="btn-link text-white ml-auto ml-sm-0">
                                         Войти
                                         </a>
                                         <div class="blankpage-footer text-center">
-                                        Нет аккаунта? <a href="/php/lessons_php/module_2/module_2_training_project/public/index.php/register"><strong>Зарегистрироваться</strong>
+                                        Нет аккаунта? <a href="/book-of-friends-php-component/register"><strong>Зарегистрироваться</strong>
                                         </div>
                                         </div> 
                             <?php endif;?>  
@@ -134,9 +135,9 @@ $auth = new \Delight\Auth\Auth($pdo);
 
 <?php endforeach;?>
 
-<div class="row" id="js-contacts">
+<div class="row" ">
     <div class="col-xl-4">
-        <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="oliver kopyov">
+        <div class="card border shadow-0 mb-g shadow-sm-hover" >
             <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                             
             
@@ -164,4 +165,36 @@ $auth = new \Delight\Auth\Auth($pdo);
         </div>
     </div>
 </div>
+</main>
+<script src="/book-of-friends-php-component/app/views/js/vendors.bundle.js"></script>
+<script src="/book-of-friends-php-component/app/views/js/app.bundle.js"></script>
+    <script>
 
+        $(document).ready(function()
+        {
+
+            $('input[type=radio][name=contactview]').change(function()
+                {
+                    if (this.value == 'grid')
+                    {
+                        $('#js-contacts .card').removeClassPrefix('mb-').addClass('mb-g');
+                        $('#js-contacts .col-xl-12').removeClassPrefix('col-xl-').addClass('col-xl-4');
+                        $('#js-contacts .js-expand-btn').addClass('d-none');
+                        $('#js-contacts .card-body + .card-body').addClass('show');
+
+                    }
+                    else if (this.value == 'table')
+                    {
+                        $('#js-contacts .card').removeClassPrefix('mb-').addClass('mb-1');
+                        $('#js-contacts .col-xl-4').removeClassPrefix('col-xl-').addClass('col-xl-12');
+                        $('#js-contacts .js-expand-btn').removeClass('d-none');
+                        $('#js-contacts .card-body + .card-body').removeClass('show');
+                    }
+
+                });
+
+                //initialize filter
+                initApp.listFilter($('#js-contacts'), $('#js-filter-contacts'));
+        });
+
+    </script>    

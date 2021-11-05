@@ -60,8 +60,8 @@
         </main>
     </body>
 
-    <script src="/php/lessons_php/module_2/module_2_training_project/app/views/js/vendors.bundle.js"></script>
-    <script src="/php/lessons_php/module_2/module_2_training_project/app/views/js/app.bundle.js"></script>
+    <script src="/book-of-friends-php-component/app/views/js/vendors.bundle.js"></script>
+    <script src="/book-of-friends-php-component/app/views/js/app.bundle.js"></script>
     <script>
 
         $(document).ready(function()

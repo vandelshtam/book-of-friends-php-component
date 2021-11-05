@@ -1,17 +1,13 @@
-<?php $this->layout('layout', ['title' => 'status']); ?>
-<!DOCTYPE html>
-<html lang="en">
+<?php $this->layout('layout', ['title' => 'Add user']); ?>
 
-<body>
-    
+
+                            <strong>Уведомление!</strong> <?php echo flash()->display();?>
+                        
     <main id="js-page-content" role="main" class="page-content mt-3">
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-plus-circle'></i> Добавить пользователя
             </h1>
-
-
-
         </div>
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="row">
@@ -82,7 +78,7 @@
                                 <div class="panel-content">
                                 <div class="form-group">
                                     
-                                    <img src="img/demo/avatars/photo_2021-01-25_16-09-22.jpg" alt="" class="img-responsive" width="200">
+                                    <img src="/book-of-friends-php-component/app/views/img/demo/avatars/avatar-m.png" alt="" class="img-responsive" width="200">
                                      
                                 </div>
 
@@ -160,8 +156,8 @@
         </form>
     </main>
 
-    <script src="/php/lessons_php/module_2/module_2_training_project/app/views/js/vendors.bundle.js"></script>
-    <script src="/php/lessons_php/module_2/module_2_training_project/app/views/js/app.bundle.js"></script>
+    <script src="/book-of-friends-php-component/app/views/js/vendors.bundle.js"></script>
+    <script src="/book-of-friends-php-component/app/views/js/app.bundle.js"></script>
     <script>
 
         $(document).ready(function()
@@ -171,5 +167,3 @@
         });
 
     </script>
-</body>
-</html>

@@ -64,6 +64,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/book-of-friends-php-component/delete/{id:\d+}', ['App\controllers\UserController','delete']);
     $r->addRoute('GET', '/book-of-friends-php-component/security_admin/{id:\d+}', ['App\controllers\UserController','security_admin']);
     $r->addRoute('POST', '/book-of-friends-php-component/security_admin/{id:\d+}', ['App\controllers\UserController','security_admin']);
+    $r->addRoute('GET', '/book-of-friends-php-component/security/{id:\d+}', ['App\controllers\UserController','security']);
+    $r->addRoute('POST', '/book-of-friends-php-component/security/{id:\d+}', ['App\controllers\UserController','security']);
     $r->addRoute('GET', '/book-of-friends-php-component/paginator', ['App\controllers\HomeController','paginator']);
     $r->addRoute('GET', '/book-of-friends-php-component/confirm_password/{id:\d+}', ['App\controllers\UserController','confirm_password']);
     $r->addRoute('POST', '/book-of-friends-php-component/confirm_password/{id:\d+}', ['App\controllers\UserController','confirm_password']);

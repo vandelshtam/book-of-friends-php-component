@@ -28,7 +28,7 @@
         <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
             <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
                 <img src="/php/lessons_php/module_2/module_2_training_project/app/views/img/logo.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
-                <span class="page-logo-text mr-1">Учебный проект</span>
+                <span class="page-logo-text mr-1">Book-of-friends</span>
                 <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
             </a>
         </div>
@@ -52,13 +52,13 @@
             </form>
         </div>
         <div class="blankpage-footer text-center">
-            Нет аккаунта? <a href="/php/lessons_php/module_2/module_2_training_project/public/index.php/register"><strong>Зарегистрироваться</strong>
+            Нет аккаунта? <a href="/book-of-friends-php-component/register"><strong>Зарегистрироваться</strong>
         </div>
     </div>
-    <video poster="/php/lessons_php/module_2/module_2_training_project/app/views/img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>
-        <source src="/php/lessons_php/module_2/module_2_training_project/app/views/media/video/cc.webm" type="video/webm">
-        <source src="/php/lessons_php/module_2/module_2_training_project/app/views/media/video/cc.mp4" type="video/mp4">
+    <video poster="/book-of-friends-php-component/app/views/img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>
+        <source src="/book-of-friends-php-component/app/views/media/video/cc.webm" type="video/webm">
+        <source src="/book-of-friends-php-component/app/views/media/video/cc.mp4" type="video/mp4">
     </video>
-    <script src="/php/lessons_php/module_2/module_2_training_project/app/views/js/vendors.bundle.js"></script>
+    <script src="/book-of-friends-php-component/app/views/js/vendors.bundle.js"></script>
 </body>
 </html>

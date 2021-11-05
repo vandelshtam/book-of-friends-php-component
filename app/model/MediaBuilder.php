@@ -41,9 +41,9 @@ class MediaBuilder{
     public function deleteFileAvatar($id){
           
         $user=$this->qb->getUser($id,'users');
-        if($user['avatar']!=null and $user['avatar'] != '/php/lessons_php/module_2/module_2_training_project/app/views/img/demo/avatars/plane_demo.png')
+        if($user['avatar']!=null and $user['avatar'] != 'avatar-m.png')
         {
-            unlink('/Applications/MAMP/htdocs'.$user['avatar']);
+            unlink('uploads/'.$user['avatar']);
         }    
     }
 

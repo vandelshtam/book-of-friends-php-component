@@ -3,14 +3,17 @@ $this->layout('layout', ['title' => 'List all users']);
 $pdo = new PDO("mysql:host=localhost:8889; dbname=app3; charset=utf8;","root","root");
 $auth = new \Delight\Auth\Auth($pdo);
 ?>
-            <div class="row">
+
+    <main id="js-page-content" role="main" class="page-content mt-6">
+    
+            <div class="row mt-6 sticky-top">
                 <div class="col-xl-12">
                     <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER)):?>
-                    <a class="btn btn-success" href="/book-of-friends-php-component/index.php/addUser">Добавить</a>
+                    <a class="btn btn-dark text-white" style="border-radius: 10px;"  href="/book-of-friends-php-component/addUser">Добавить</a>
                     <?php endif;?>
-                    <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
-                        <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
-                        <div class="btn-group btn-group-lg btn-group-toggle hidden-lg-down ml-3" data-toggle="buttons">
+                    <div class="border-faded bg-faded p-3 mb-g d-flex mt-3 mt-6 sticky-top" style="border-radius: 25px; background-color: rgb(220 220 220)">
+                        <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg"  style="border-radius: 10px;" placeholder="Найти пользователя">
+                        <div class="btn-group btn-group-lg btn-group-toggle hidden-lg-down ml-3"  data-toggle="buttons">
                             <label class="btn btn-default active">
                                 <input type="radio" name="contactview" id="grid" checked="" value="grid"><i class="fas fa-table"></i>
                             </label>
@@ -34,27 +37,29 @@ $auth = new \Delight\Auth\Auth($pdo);
                 </ul>   
                 </h1>
             </div>
-            <?php foreach($users as $user):?>
+            
             <div class="row" id="js-contacts">
-                <div class="col-xl-4">
-                    <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="oliver kopyov">
-                        <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
+                <?php foreach($users as $user):?>
+                <div class="col-xl-4" >
+                    <div id="<?=$user['c'];?>" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="<?=$user['search'];?>" style='border-radius: 25px; background-color: rgb(235 235 235)'>
+                        <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top" >
                             <div class="d-flex flex-row align-items-center">
                                 <?php if($user['status']==0):?>
-                                <span class="status status-success mr-3">
-                                    <span class="rounded-circle profile-image d-block " style="background-image:url('<?=$user['avatar'];?>'); background-size: cover;"></span>
-                                </span>
+                                    <span class="status status-success mr-3">
                                 <?php endif;?>
                                 <?php if($user['status']==1):?>
-                                <span class="status status-warning mr-3">
-                                    <span class="rounded-circle profile-image d-block " style="background-image:url('<?=$user['avatar'];?>'); background-size: cover;"></span>
-                                </span>
-                                <?php endif;?>
+                                    <span class="status status-warning mr-3">
+                                <?php endif;?> 
                                 <?php if($user['status']==2):?>
-                                <span class="status status-danger mr-3">
-                                    <span class="rounded-circle profile-image d-block " style="background-image:url('<?=$user['avatar'];?>'); background-size: cover;"></span>
-                                </span>
+                                   <span class="status status-danger mr-3">
                                 <?php endif;?>
+                                <?php if($user['avatar']=='avatar-m.png'):?>
+                                    <span class="rounded-circle profile-image d-block " style="background-image:url('/book-of-friends-php-component/app/views/img/demo/avatars/<?=$user['avatar'];?>'); background-size: cover;"></span>
+                                </span>
+                                <?php else:?> 
+                                <span class="rounded-circle profile-image d-block " style="background-image:url('/book-of-friends-php-component/public/uploads/<?=$user['avatar'];?>'); background-size: cover;"></span>
+                                </span>
+                                <?php endif;?> 
                                 <div class="info-card-text flex-1">
                                     <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
                                         <?=$user['username'];?>
@@ -64,13 +69,13 @@ $auth = new \Delight\Auth\Auth($pdo);
                                     
                                     <?php if($auth->isLoggedIn()):?>
                                         
-                                               <div class="dropdown-menu">
+                                            <div class="dropdown-menu " style="border-radius: 25px; background-color: rgb(200 200 200); z-index: 1075;">
                                                <a class="dropdown-item" href="/book-of-friends-php-component/page_profile/<?=$user['id'];?>">
                                                 <i class="fa fa-edit"></i>
                                                 Открыть профиль</a> 
                                                 <?php endif;?> 
                                                 <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER)):?> 
-                                                <a class="dropdown-item" href="/php/lessons_php/module_2/module_2_training_project/public/index.php/roles/<?=$user['id'];?>">
+                                                <a class="dropdown-item" href="/book-of-friends-php-component/roles/<?=$user['id'];?>">
                                                 <i class="fa fa-edit"></i>
                                                 Управлять ролями</a>
                                                 <?php endif;?>
@@ -81,6 +86,9 @@ $auth = new \Delight\Auth\Auth($pdo);
                                                 <a class="dropdown-item" href="/book-of-friends-php-component/security_admin/<?=$user['id'];?>">
                                                 <i class="fa fa-lock"></i>
                                                 Безопасность</a>
+                                                <a class="dropdown-item" href="/book-of-friends-php-component/security/<?=$user['id'];?>">
+                                                <i class="fa fa-lock"></i>
+                                                Изменить данные пользователя</a>
                                                 <a class="dropdown-item" href="/book-of-friends-php-component/status/<?=$user['id'];?>">
                                                 <i class="fa fa-sun"></i>
                                                 Установить статус</a>
@@ -92,11 +100,11 @@ $auth = new \Delight\Auth\Auth($pdo);
                                                 <i class="fa fa-window-close"></i>
                                                 Удалить
                                                 </a>   
-                                                </div>
+                                            </div>
                                                   
                                             
                                     <?php endif;?> 
-                                    </div>
+                                </div>
                                 <button class="js-expand-btn btn btn-sm btn-default d-none" data-toggle="collapse" data-target="#c_1 > .card-body + .card-body" aria-expanded="false">
                                     <span class="collapsed-hidden">+</span>
                                     <span class="collapsed-reveal">-</span>
@@ -108,27 +116,27 @@ $auth = new \Delight\Auth\Auth($pdo);
                         <?php if($auth->isLoggedIn()):?>   
                         <div class="card-body p-0 collapse show">
                          
-                                        <div class="p-3">
+                                    <div class="p-3">
                                         <a href="tel:+13174562564" class="mt-1 d-block fs-sm fw-400 text-dark">
                                         <i class="fas fa-mobile-alt text-muted mr-2"></i><?=$user['phone'];?></a>
                                         <a href="mailto:oliver.kopyov@smartadminwebapp.com" class="mt-1 d-block fs-sm fw-400 text-dark">
                                         <i class="fas fa-mouse-pointer text-muted mr-2"></i><?=$user['email'];?></a>
                                         <address class="fs-sm fw-400 mt-4 text-muted">
                                         <i class="fas fa-map-pin mr-2"></i><?=$user['city'];?></address>
-                                        <div class="d-flex flex-row">
-                                        <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#4680C2">
-                                        <i class="fab fa-vk"><?=$user['vk'];?></i>
-                                        </a>
-                                        <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#38A1F3">
-                                        <i class="fab fa-telegram"><?=$user['telegram'];?></i>
-                                        </a>
-                                        <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#E1306C">
-                                        <i class="fab fa-instagram"><?=$user['instagram'];?></i>
-                                        </a>
-                                        </div>
-                                        </div>
+                                            <div class="d-flex flex-row">
+                                                <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#4680C2">
+                                                <i class="fab fa-vk"><?=$user['vk'];?></i>
+                                                </a>
+                                                <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#38A1F3">
+                                                <i class="fab fa-telegram"><?=$user['telegram'];?></i>
+                                                </a>
+                                                <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#E1306C">
+                                                <i class="fab fa-instagram"><?=$user['instagram'];?></i>
+                                                </a>
+                                            </div>
+                                    </div>
                                         <?php else:?>
-                                        <div class="subheader">
+                                    <div class="subheader">
                                         <h6 class="subheader-title">
                                         <i class='subheader-icon fal fa-users'></i> 
                                         Информация для зарегистрированных пользователей   
@@ -139,18 +147,43 @@ $auth = new \Delight\Auth\Auth($pdo);
                                         <div class="blankpage-footer text-center">
                                         Нет аккаунта? <a href="/book-of-friends-php-component/register"><strong>Зарегистрироваться</strong>
                                         </div>
-                                        </div> 
-                            <?php endif;?>  
-                            </div> 
+                                    </div> 
+                        </div>
+                        <?php endif;?>     
                         </div>                   
                     </div>
                 </div>
-            </div>
-        <?php endforeach;?>
+                <?php endforeach;?>
+            </div>    
+    </main>
+    <script src="/book-of-friends-php-component/app/views/js/vendors.bundle.js"></script>
+    <script src="/book-of-friends-php-component/app/views/js/app.bundle.js"></script>
+    <script>
 
-         
+    $(document).ready(function()
+            {
 
+                $('input[type=radio][name=contactview]').change(function()
+                    {
+                        if (this.value == 'grid')
+                        {
+                            $('#js-contacts .card').removeClassPrefix('mb-').addClass('mb-g');
+                            $('#js-contacts .col-xl-12').removeClassPrefix('col-xl-').addClass('col-xl-4');
+                            $('#js-contacts .js-expand-btn').addClass('d-none');
+                            $('#js-contacts .card-body + .card-body').addClass('show');
 
+                        }
+                        else if (this.value == 'table')
+                        {
+                            $('#js-contacts .card').removeClassPrefix('mb-').addClass('mb-1');
+                            $('#js-contacts .col-xl-4').removeClassPrefix('col-xl-').addClass('col-xl-12');
+                            $('#js-contacts .js-expand-btn').removeClass('d-none');
+                            $('#js-contacts .card-body + .card-body').removeClass('show');
+                        }
 
+                    });
 
-
+                    //initialize filter
+                    initApp.listFilter($('#js-contacts'), $('#js-filter-contacts'));
+            });
+</script>    

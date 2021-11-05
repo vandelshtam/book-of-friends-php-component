@@ -1,11 +1,9 @@
 <?php 
-$this->layout('layout', ['title' => 'List all users']);
+$this->layout('layout', ['title' => 'Security']);
 $pdo = new PDO("mysql:host=localhost:8889; dbname=app3; charset=utf8;","root","root");
 $auth = new \Delight\Auth\Auth($pdo);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<body>
+
     <main id="js-page-content" role="main" class="page-content mt-3">
         <div class="subheader">
             <h1 class="subheader-title">
@@ -53,37 +51,6 @@ $auth = new \Delight\Auth\Auth($pdo);
         </form>
     </main>
 
-    <script src="/php/lessons_php/module_2/module_2_training_project/app/views/js/vendors.bundle.js"></script>
-    <script src="/php/lessons_php/module_2/module_2_training_project/app/views/js/app.bundle.js"></script>
-    <script>
-
-        $(document).ready(function()
-        {
-
-            $('input[type=radio][name=contactview]').change(function()
-                {
-                    if (this.value == 'grid')
-                    {
-                        $('#js-contacts .card').removeClassPrefix('mb-').addClass('mb-g');
-                        $('#js-contacts .col-xl-12').removeClassPrefix('col-xl-').addClass('col-xl-4');
-                        $('#js-contacts .js-expand-btn').addClass('d-none');
-                        $('#js-contacts .card-body + .card-body').addClass('show');
-
-                    }
-                    else if (this.value == 'table')
-                    {
-                        $('#js-contacts .card').removeClassPrefix('mb-').addClass('mb-1');
-                        $('#js-contacts .col-xl-4').removeClassPrefix('col-xl-').addClass('col-xl-12');
-                        $('#js-contacts .js-expand-btn').removeClass('d-none');
-                        $('#js-contacts .card-body + .card-body').removeClass('show');
-                    }
-
-                });
-
-                //initialize filter
-                initApp.listFilter($('#js-contacts'), $('#js-filter-contacts'));
-        });
-
-    </script>
-</body>
-</html>
+    <script src="/book-of-friends-php-component/app/views/js/vendors.bundle.js"></script>
+    <script src="/book-of-friends-php-component/app/views/js/app.bundle.js"></script>
+    

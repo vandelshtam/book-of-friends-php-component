@@ -1,8 +1,7 @@
 <?php $this->layout('layout', ['title' => 'Delete profile']); ?>
-<!DOCTYPE html>
-<html lang="en">
 
-    <body class="mod-bg-1 mod-nav-link">
+
+    
         
         <main id="js-page-content" role="main" class="page-content mt-3">
             
@@ -11,6 +10,7 @@
                     <i class='subheader-icon fal fa-user'></i> <?=$user['username'];?>
                 </h1>
             </div>
+            <?php echo flash()->display();?>
             <div class="row">
               <div class="col-lg-6 col-xl-6 m-auto">
                     <!-- profile summary -->
@@ -52,14 +52,15 @@
                </div>
                
             </div>
-            <form action="" method="POST" enctype="multipart/form-data" md-0>
+
+            
+            <form action="/book-of-friends-php-component/deleteShow/<?=$user['id']?>" method="POST"  md-0>
                <div class="col-md-12 mt-3 d-flex flex-row-reverse">
                         <button class="btn btn-warning" name="delete_user">Удалить пользователя и его профиль</button>                    
                 </div>
                </form>
         </main>
-    </body>
-
+    
     <script src="/book-of-friends-php-component/app/views/js/vendors.bundle.js"></script>
     <script src="/book-of-friends-php-component/app/views/js/app.bundle.js"></script>
     <script>
@@ -70,4 +71,3 @@
         });
 
     </script>
-</html>

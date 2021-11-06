@@ -11,6 +11,7 @@ $auth = new \Delight\Auth\Auth($pdo);
             </h1>
 
         </div>
+        <strong class="rounded-plus"><?php echo flash()->display();?></strong> 
         <form action="" method="POST">
             <div class="row">
                 <div class="col-xl-6">
@@ -19,11 +20,20 @@ $auth = new \Delight\Auth\Auth($pdo);
                             <div class="panel-hdr">
                                 <h2>Обновление эл. адреса и пароля</h2>
                             </div>
+                            <div class="panel-hdr">
+                                <p>Если вам нужно изменить только электронную почту, то в поля 'пароль' и 'подтверждение пароля' введите свой действующий пароль.</p>
+                            </div>
                             <div class="panel-content">
+                                <!-- username -->
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Username</label>
+                                    <input type="text" id="simpleinput" class="form-control" value="<?=$user['username'];?>" name="username">
+                                </div>
+
                                 <!-- email -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="<?=$user['email'];?>" name="email">
+                                    <input type="email" id="simpleinput" class="form-control" value="<?=$user['email'];?>" name="email">
                                 </div>
 
                                 <!-- password -->

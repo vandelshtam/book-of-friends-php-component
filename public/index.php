@@ -62,6 +62,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/book-of-friends-php-component/roles/{id:\d+}', ['App\controllers\UserController','roles']);
     $r->addRoute('GET', '/book-of-friends-php-component/delete/{id:\d+}', ['App\controllers\UserController','delete']);
     $r->addRoute('POST', '/book-of-friends-php-component/delete/{id:\d+}', ['App\controllers\UserController','delete']);
+    $r->addRoute('GET', '/book-of-friends-php-component/deleteShow/{id:\d+}', ['App\controllers\UserController','deleteShow']);
+    $r->addRoute('POST', '/book-of-friends-php-component/deleteShow/{id:\d+}', ['App\controllers\UserController','deleteShow']);
     $r->addRoute('GET', '/book-of-friends-php-component/security_admin/{id:\d+}', ['App\controllers\UserController','security_admin']);
     $r->addRoute('POST', '/book-of-friends-php-component/security_admin/{id:\d+}', ['App\controllers\UserController','security_admin']);
     $r->addRoute('GET', '/book-of-friends-php-component/security/{id:\d+}', ['App\controllers\UserController','security']);

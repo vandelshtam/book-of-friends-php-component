@@ -8,20 +8,17 @@ Hypertext Transfer Protocol (HTTP) utilities for PHP
 
 ## Installation
 
- * Install via [Composer](https://getcomposer.org/) (recommended)
+ 1. Include the library via Composer [[?]](https://github.com/delight-im/Knowledge/blob/master/Composer%20(PHP).md):
 
-   `$ composer require delight-im/http`
+    ```
+    $ composer require delight-im/http
+    ```
 
-   Include the Composer autoloader:
+ 1. Include the Composer autoloader:
 
-   `require __DIR__.'/vendor/autoload.php';`
-
- * or
-
- * Install manually
-
-   * Copy the contents of the [`src`](src) directory to a subfolder of your project
-   * Include the files in your code via `require` or `require_once`
+    ```php
+    require __DIR__ . '/vendor/autoload.php';
+    ```
 
 ## Usage
 
@@ -30,37 +27,37 @@ Hypertext Transfer Protocol (HTTP) utilities for PHP
  * Retrieving a header (with optional value prefix)
 
    ```php
-   \Delight\Http\ResponseHeader::get('Content-type')
+   $header = \Delight\Http\ResponseHeader::get('Content-Type');
    // or
-   \Delight\Http\ResponseHeader::get('Content-type', 'text/')
+   $header = \Delight\Http\ResponseHeader::get('Content-Type', 'text/');
    ```
 
  * Setting a header (overwriting other headers with the same name)
 
    ```php
-   \Delight\Http\ResponseHeader::set('X-Frame-Options', 'SAMEORIGIN')
+   \Delight\Http\ResponseHeader::set('X-Frame-Options', 'sameorigin');
    ```
 
  * Adding a header (preserving other headers with the same name)
 
    ```php
-   \Delight\Http\ResponseHeader::add('X-Frame-Options', 'SAMEORIGIN')
+   \Delight\Http\ResponseHeader::add('Vary', 'User-Agent');
    ```
 
  * Removing a header (with optional value prefix)
 
    ```php
-   \Delight\Http\ResponseHeader::get('X-Powered-By')
+   $success = \Delight\Http\ResponseHeader::remove('X-Powered-By');
    // or
-   \Delight\Http\ResponseHeader::get('X-Powered-By', 'PHP')
+   $success = \Delight\Http\ResponseHeader::remove('X-Powered-By', 'PHP');
    ```
 
  * Retrieving and removing a header at once (with optional value prefix)
 
    ```php
-   \Delight\Http\ResponseHeader::take('Set-Cookie')
+   $header = \Delight\Http\ResponseHeader::take('Set-Cookie');
    // or
-   \Delight\Http\ResponseHeader::take('Set-Cookie', 'mysession=')
+   $header = \Delight\Http\ResponseHeader::take('Set-Cookie', 'mysession=');
    ```
 
 ## Contributing

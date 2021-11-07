@@ -21,14 +21,18 @@ final class ResponseHeader {
 	 * @return string|null the header (if found) or `null`
 	 */
 	public static function get($name, $valuePrefix = '') {
-		$nameLength = strlen($name);
-		$valuePrefixLength = strlen($valuePrefix);
+		if (empty($name)) {
+			return null;
+		}
 
-		$headers = headers_list();
+		$nameLength = \strlen($name);
+		$headers = \headers_list();
 
 		foreach ($headers as $header) {
-			if (substr($header, 0, $nameLength) === $name) {
-				if (substr($header, $nameLength + 2, $valuePrefixLength) === $valuePrefix) {
+			if (\strcasecmp(\substr($header, 0, $nameLength + 1), ($name . ':')) === 0) {
+				$headerValue = \trim(\substr($header, $nameLength + 1), "\t ");
+
+				if (empty($valuePrefix) || \substr($headerValue, 0, \strlen($valuePrefix)) === $valuePrefix) {
 					return $header;
 				}
 			}
@@ -38,23 +42,49 @@ final class ResponseHeader {
 	}
 
 	/**
+	 * Returns the value of the header with the specified name (and optional value prefix)
+	 *
+	 * @param string $name the name of the header
+	 * @param string $valuePrefix the optional string to match at the beginning of the header's value
+	 * @return string|null the value of the header (if found) or `null`
+	 */
+	public static function getValue($name, $valuePrefix = '') {
+		$header = static::get($name, $valuePrefix);
+
+		if (!empty($header)) {
+			$nameLength = \strlen($name);
+			$headerValue = \substr($header, $nameLength + 1);
+			$headerValue = \trim($headerValue, "\t ");
+
+			return $headerValue;
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Sets the header with the specified name and value
+	 *
+	 * If another header with the same name has already been set previously, that header will be overwritten
 	 *
 	 * @param string $name the name of the header
 	 * @param string $value the corresponding value for the header
 	 */
 	public static function set($name, $value) {
-		header($name.': '.$value);
+		\header($name . ': ' . $value, true);
 	}
 
 	/**
 	 * Adds the header with the specified name and value
 	 *
+	 * If another header with the same name has already been set previously, both headers (or header values) will be sent
+	 *
 	 * @param string $name the name of the header
 	 * @param string $value the corresponding value for the header
 	 */
 	public static function add($name, $value) {
-		header($name.': '.$value, false);
+		\header($name . ': ' . $value, false);
 	}
 
 	/**
@@ -62,18 +92,10 @@ final class ResponseHeader {
 	 *
 	 * @param string $name the name of the header
 	 * @param string $valuePrefix the optional string to match at the beginning of the header's value
+	 * @return bool whether a header, as specified, has been found and removed
 	 */
 	public static function remove($name, $valuePrefix = '') {
-		if (empty($valuePrefix)) {
-			header_remove($name);
-		}
-		else {
-			$found = self::get($name, $valuePrefix);
-
-			if (isset($found)) {
-				header_remove($name);
-			}
-		}
+		return static::take($name, $valuePrefix) !== null;
 	}
 
 	/**
@@ -84,12 +106,56 @@ final class ResponseHeader {
 	 * @return string|null the header (if found) or `null`
 	 */
 	public static function take($name, $valuePrefix = '') {
-		$found = self::get($name, $valuePrefix);
+		if (empty($name)) {
+			return null;
+		}
 
-		if (isset($found)) {
-			header_remove($name);
+		$nameLength = \strlen($name);
+		$headers = \headers_list();
 
-			return $found;
+		$first = null;
+		$homonyms = [];
+
+		foreach ($headers as $header) {
+			if (\strcasecmp(\substr($header, 0, $nameLength + 1), ($name . ':')) === 0) {
+				$headerValue = \trim(\substr($header, $nameLength + 1), "\t ");
+
+				if ((empty($valuePrefix) || \substr($headerValue, 0, \strlen($valuePrefix)) === $valuePrefix) && $first === null) {
+					$first = $header;
+				}
+				else {
+					$homonyms[] = $header;
+				}
+			}
+		}
+
+		if ($first !== null) {
+			\header_remove($name);
+
+			foreach ($homonyms as $homonym) {
+				\header($homonym, false);
+			}
+		}
+
+		return $first;
+	}
+
+	/**
+	 * Returns the value of and removes the header with the specified name (and optional value prefix)
+	 *
+	 * @param string $name the name of the header
+	 * @param string $valuePrefix the optional string to match at the beginning of the header's value
+	 * @return string|null the value of the header (if found) or `null`
+	 */
+	public static function takeValue($name, $valuePrefix = '') {
+		$header = static::take($name, $valuePrefix);
+
+		if (!empty($header)) {
+			$nameLength = \strlen($name);
+			$headerValue = \substr($header, $nameLength + 1);
+			$headerValue = \trim($headerValue, "\t ");
+
+			return $headerValue;
 		}
 		else {
 			return null;

@@ -56,7 +56,7 @@
             </form>
         </div>
         <div class="blankpage-footer text-center text-danger">
-            Нет аккаунта? <a class="text-danger" href="/book-of-friends-php-component/register"><strong>Зарегистрироваться</strong>
+            Нет аккаунта? <a class="text-danger" href="/book-of-friends-php-component/registerShow"><strong>Зарегистрироваться</strong>
         </div>
     </div>
     

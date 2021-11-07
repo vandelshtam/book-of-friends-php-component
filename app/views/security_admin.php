@@ -22,17 +22,18 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/php/lessons_php/module_2/module_2_training_project/app/views/img/favicon/favicon-32x32.png">
     <link rel="mask-icon" href="/php/lessons_php/module_2/module_2_training_project/app/views/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="stylesheet" media="screen, print" href="/php/lessons_php/module_2/module_2_training_project/app/views/css/page-login-alt.css">
+    <link rel="stylesheet" type="text/css" href="/book-of-friends-php-component/app/views/css/style.css">  
 </head>
 <body>
     <div class="blankpage-form-field">
-        <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
+        <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded-plus border-bottom-left-radius-0 border-bottom-right-radius-0 px-4 navBackground">
             <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
                 <img src="/php/lessons_php/module_2/module_2_training_project/app/views/img/logo.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
                 <span class="page-logo-text mr-1">Book-of-friends</span>
                 <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
             </a>
         </div>
-        <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
+        <div class="card p-4 rounded-plus border-top-left-radius-0 border-top-right-radius-0">
             
             <?php echo flash()->display();?>
             
@@ -51,8 +52,8 @@
                 <button type="submit" class="btn btn-default float-right" name="security_name">Подтвердить смену пароля</button>
             </form>
         </div>
-        <div class="blankpage-footer text-center">
-            Нет аккаунта? <a href="/book-of-friends-php-component/register"><strong>Зарегистрироваться</strong>
+        <div class="blankpage-footer text-center text-danger">
+            Нет аккаунта? <a class=" text-danger" href="/book-of-friends-php-component/registerShow"><strong>Зарегистрироваться</strong>
         </div>
     </div>
     <video poster="/book-of-friends-php-component/app/views/img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>

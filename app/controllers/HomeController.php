@@ -86,7 +86,7 @@ class HomeController{
         }
             $avatar=$this->mb->getAvatar($id,'users');
             $current_avatar=$this->mb->hisAvatar($id,'users');
-            echo $this->templates->render('media', ['name'=>'media', 'avatar' => $avatar, 'current_avatar' => $current_avatar]);
+            echo $this->templates->render('media', ['name'=>'media', 'avatar' => $avatar, 'current_avatar' => $current_avatar, 'id' => $id]);
     }
 
 
@@ -114,22 +114,27 @@ class HomeController{
 
 
 
-    public function status($vars){
+    public function statusShow($vars){
         $id = $vars['id'];
         $statuses=$this->qb->getUser($id,'users');  
         $list_statuses=[0 => 'online', 1 => 'walked away', 2 => 'do not disturb'];
-        $list_statuses_set=[ 'online' => 0,  'walked away' => 1,  'do not disturb' => 2];
+            
+        echo $this->templates->render('status', ['name'=>'status', 'statuses'=> $statuses, 'list_statuses' => $list_statuses, 'id' => $id]);
+    } 
 
+
+
+
+    public function status($vars){
+        $id = $vars['id'];
+        $list_statuses_set=[ 'online' => 0,  'walked away' => 1,  'do not disturb' => 2];              
         
-                      
-        if(isset($_POST['status'])){
             $status_key = $list_statuses_set[$_POST['status']];
             $data = ['status' => $status_key];    
             $this->qb->update($data,$id,'users');
-            flash()->success('Вы успешно обновили свой статус');    
-        }
+            flash()->success('Вы успешно обновили свой статус');
+            header('Location: /book-of-friends-php-component/home');  
             
-        echo $this->templates->render('status', ['name'=>'status', 'statuses'=> $statuses, 'list_statuses' => $list_statuses]);
     } 
     }
 

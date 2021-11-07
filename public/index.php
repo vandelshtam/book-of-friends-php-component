@@ -46,6 +46,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/book-of-friends-php-component/edit_user/{id:\d+}', ['App\controllers\UserController','edit']);
     $r->addRoute('GET', '/book-of-friends-php-component/register', ['App\controllers\UserController','register']);
     $r->addRoute('POST', '/book-of-friends-php-component/register', ['App\controllers\UserController','register']);
+    $r->addRoute('GET', '/book-of-friends-php-component/registerShow', ['App\controllers\UserController','registerShow']);
+    $r->addRoute('POST', '/book-of-friends-php-component/registerShow', ['App\controllers\UserController','registerShow']);
     $r->addRoute('GET', '/book-of-friends-php-component/verification', ['App\controllers\UserController','email_verification']);
     $r->addRoute('POST', '/book-of-friends-php-component/verification', ['App\controllers\UserController','email_verification']);
     $r->addRoute('GET', '/book-of-friends-php-component/login', ['App\controllers\UserController','login']);
@@ -53,6 +55,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/book-of-friends-php-component/logout', ['App\controllers\UserController','logout']);
     $r->addRoute('GET', '/book-of-friends-php-component/status/{id:\d+}', ['App\controllers\HomeController','status']);
     $r->addRoute('POST', '/book-of-friends-php-component/status/{id:\d+}', ['App\controllers\HomeController','status']);
+    $r->addRoute('GET', '/book-of-friends-php-component/statusShow/{id:\d+}', ['App\controllers\HomeController','statusShow']);
+    $r->addRoute('POST', '/book-of-friends-php-component/statusShow/{id:\d+}', ['App\controllers\HomeController','statusShow']);
     $r->addRoute('GET', '/book-of-friends-php-component/load_avatar/{id:\d+}', ['App\controllers\HomeController','avatar']);
     $r->addRoute('POST', '/book-of-friends-php-component/load_avatar/{id:\d+}', ['App\controllers\HomeController','avatar']);
     $r->addRoute('GET', '/book-of-friends-php-component/addUser', ['App\controllers\UserController','addUser']);
@@ -69,6 +73,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/book-of-friends-php-component/security/{id:\d+}', ['App\controllers\UserController','security']);
     $r->addRoute('POST', '/book-of-friends-php-component/security/{id:\d+}', ['App\controllers\UserController','security']);
     $r->addRoute('GET', '/book-of-friends-php-component/paginator', ['App\controllers\HomeController','paginator']);
+    $r->addRoute('GET', '/book-of-friends-php-component/confirm_passwordShow/{id:\d+}', ['App\controllers\UserController','confirm_passwordShow']);
+    $r->addRoute('POST', '/book-of-friends-php-component/confirm_passwordShow/{id:\d+}', ['App\controllers\UserController','confirm_passwordShow']);
     $r->addRoute('GET', '/book-of-friends-php-component/confirm_password/{id:\d+}', ['App\controllers\UserController','confirm_password']);
     $r->addRoute('POST', '/book-of-friends-php-component/confirm_password/{id:\d+}', ['App\controllers\UserController','confirm_password']);
     

@@ -23,34 +23,33 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/book-of-friends-php-component/app/views/img/favicon/favicon-32x32.png">
     <link rel="mask-icon" href="/book-of-friends-php-component/app/views/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="stylesheet" media="screen, print" href="/book-of-friends-php-component/app/views/css/page-login-alt.css">
+    <link rel="stylesheet" type="text/css" href="/book-of-friends-php-component/app/views/css/style.css"> 
 </head>
 <body>
     <div class="blankpage-form-field">
-        <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
+        <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded-plus border-bottom-left-radius-0 border-bottom-right-radius-0 px-4 navBackground">
             <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
                 <img src="/book-of-friends-php-component/app/views/img/type2.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
                 <span class="page-logo-text mr-1">Book-of-friends</span>
                 <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
             </a>
         </div>
-        <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
-            
+        <div class="card p-4 rounded-plus border-top-left-radius-0 border-top-right-radius-0 card_grey">
+            <br><br>
             <?php echo flash()->display();?>
             
-            <form action="" method="POST">
-                
+            <form action="/book-of-friends-php-component/confirm_password/<?=$id;?>" method="POST">   
                 <div class="form-group">
                     <label class="form-label" for="password">Пароль</label>
-                    <input type="password" id="password" class="form-control" placeholder="" name="c_password">
+                    <input type="password" id="password" class="form-control rounded-plus" placeholder="" name="c_password">
                 </div>
-                <div class="form-group text-left">
-                    
+                <div class="form-group text-left">       
                 </div>
                 <button type="submit" class="btn btn-default float-right" name="confirm">Подтвердить пароль</button>
             </form>
         </div>
-        <div class="blankpage-footer text-center">
-            Нет аккаунта? <a href="/book-of-friends-php-component/app/views/register"><strong>Зарегистрироваться</strong>
+        <div class="blankpage-footer text-center text-danger">
+            Нет аккаунта? <a class="b text-danger" href="/book-of-friends-php-component/registerShow"><strong>Зарегистрироваться</strong>
         </div>
     </div>
     <video poster="/book-of-friends-php-component/app/views/img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>

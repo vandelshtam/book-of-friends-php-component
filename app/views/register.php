@@ -24,7 +24,7 @@
 </head>
 <body>
     <div class="page-wrapper auth">
-        <div class="page-inner bodyRegisterBackground">
+        <div class="page-inner bg-secondary bg-secondary-gradient">
             <div class="page-content-wrapper bg-transparent m-0">
                 <div class="height-10 w-100 shadow-lg px-4 navBackground">
                     <div class="d-flex align-items-center container p-0">
@@ -56,20 +56,19 @@
                                 </h2>
                             </div>
                             <div class="col-xl-6 ml-auto mr-auto" >
-                                <div class="card p-4  bg-faded" style="border-radius: 25px;>
-                                    
+                                <div class="card p-4  bg-faded" style="border-radius: 25px;">
+                                    <br><br>
                                         <strong class="rounded-plus"><?php echo flash()->display();?></strong> 
-                                    
-                                    <form id="js-login" novalidate="" action="" method="POST">
+                                    <form id="js-login" novalidate="" action="/book-of-friends-php-component/register" method="POST">
                                         <div class="form-group">
                                             <label class="form-label" for="emailverify">Email</label>
-                                            <input type="email" id="emailverify" class="form-control rounded-plus" placeholder="Эл. адрес" name="email" required>
+                                            <input type="email" id="emailverify" class="form-control rounded-plus" placeholder="Эл. адрес" name="email" value="<?php if(!empty($_POST['email'])) {echo $_POST['email'];} ?>" required>
                                             <div class="invalid-feedback">Заполните поле.</div>
                                             <div class="help-block">Эл. адрес будет вашим логином при авторизации</div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="emailverify">Username</label>
-                                            <input type="username" id="emailverify" class="form-control rounded-plus"  placeholder="Username" name="username" required>
+                                            <label class="form-label" for="username">Username</label>
+                                            <input type="username" id="username" class="form-control rounded-plus"  placeholder="Username" name="username" value="<?php if(!empty($_POST['username'])) {echo $_POST['username'];} ?>" required>
                                             <div class="invalid-feedback">Заполните поле.</div>
                                             <div class="help-block">Эл. адрес будет вашим логином при авторизации</div>
                                         </div>
@@ -78,7 +77,6 @@
                                             <input type="password" id="userpassword" class="form-control rounded-plus" placeholder="" name="password" required>
                                             <div class="invalid-feedback">Заполните поле.</div>
                                         </div>
-                                       
                                         <div class="row no-gutters">
                                             <div class="col-md-4 ml-auto text-right">
                                                 <button id="js-login-btn" type="submit" class="btn btn-block rounded-plus btn-danger btn-lg mt-3">Регистрация</button>

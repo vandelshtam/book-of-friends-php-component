@@ -1,4 +1,7 @@
-<?php $this->layout('layout', ['title' => 'Edit profile']); ?>
+<?php $this->layout('layout', ['title' => 'Edit profile']);
+$pdo = new PDO("mysql:host=localhost:8889; dbname=app3; charset=utf8;","root","root");
+$auth = new \Delight\Auth\Auth($pdo);
+?>
 <br>
 <br>
     <main id="js-page-content" role="main" class="page-content mt-6">
@@ -7,7 +10,33 @@
                 <i class='subheader-icon fal fa-plus-circle'></i> Редактировать
             </h1>
         </div>
+        <br><br>
         <strong class="rounded-plus"><?php echo flash()->display();?></strong> 
+        <div class="card mb-g" style="border-radius: 25px; background-color: rgb(220 220 220)">
+                        <div class="row no-gutters row-grid">
+                            <div class="info-card-text flex-1 ml-3 mt-1">
+                                                    <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
+                                                        
+                                                        <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
+                                                        <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
+                                                    </a>
+                                                
+                                                    <div class="dropdown-menu " style="border-radius: 25px; background-color: rgb(200 200 200); z-index: 1075;">
+                                                                    <?php if($auth->isLoggedIn()):?>
+                                                                    <a class="dropdown-item" href="/book-of-friends-php-component/home">
+                                                                        <i class="fa fa-edit"></i>
+                                                                        Перейти на главную</a> 
+                                                                    <a class="dropdown-item" href="/book-of-friends-php-component/page_profile/<?=$id;?>">
+                                                                        <i class="fa fa-edit"></i>
+                                                                        Перейти к профилю</a> 
+                                                                        <?php endif;?>                         
+                                                </div>         
+                                                <button class="js-expand-btn btn btn-sm btn-default d-none" data-toggle="collapse" data-target="#c_1 > .card-body + .card-body" aria-expanded="false">
+                                                    <span class="collapsed-hidden">+</span>
+                                                    <span class="collapsed-reveal">-</span>
+                                                </button> 
+                            </div>
+                        </div>  
         <form action="" method="POST">
             <div class="row">
                 <div class="col-xl-6" >

@@ -1,8 +1,5 @@
 <?php $this->layout('layout', ['title' => 'Delete profile']); ?>
-
-
     
-        
         <main id="js-page-content" role="main" class="page-content mt-3">
             
             <div class="subheader">
@@ -10,6 +7,7 @@
                     <i class='subheader-icon fal fa-user'></i> <?=$user['username'];?>
                 </h1>
             </div>
+            <br>
             <?php echo flash()->display();?>
             <div class="row">
               <div class="col-lg-6 col-xl-6 m-auto">
@@ -54,7 +52,7 @@
             </div>
 
             
-            <form action="/book-of-friends-php-component/deleteShow/<?=$user['id']?>" method="POST"  md-0>
+            <form action="/book-of-friends-php-component/confirm_passwordShow/<?=$user['id']?>" method="POST"  md-0>
                <div class="col-md-12 mt-3 d-flex flex-row-reverse">
                         <button class="btn btn-warning" name="delete_user">Удалить пользователя и его профиль</button>                    
                 </div>

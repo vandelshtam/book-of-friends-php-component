@@ -38,13 +38,21 @@ class UserController{
 
 
 
+    public function registerShow(){
+        
+        echo $this->templates->render('register', ['name' => 'Register user!']);    
+    }
+
+
+
+
+
     public function register(){
         
-        if(!empty($_POST)){
-
         try {
             $userId = $this->auth->register($_POST['email'],$_POST['password'],$_POST['username'], function ($selector, $token) {
             echo 'Send ' . $selector . ' and ' . $token . ' to the user (e.g. via email)';
+            flash()->success('Send ' . $selector . ' and ' . $token . ' to the user (e.g. via email)');
             });
             $data_user = [ 
                 'c' => 'c_'.$userId,
@@ -52,30 +60,28 @@ class UserController{
                 ];
                 $this->qb->update($data_user, $userId,'users');
             flash()->success('Вы успешно зарегистрировались, не забудьте пройти  верификацию.');
-            //header('Location: /book-of-friends-php-component/login');        
+            header('Location: /book-of-friends-php-component/verification');        
         }
         catch (\Delight\Auth\InvalidEmailException $e) {
             flash()->error('Invalid email address');
-            header('Location: /book-of-friends-php-component/register');  
+            header('Location: /book-of-friends-php-component/registerShow');  
             die();
         }
         catch (\Delight\Auth\InvalidPasswordException $e) {
             flash()->error('Invalid password');
-            header('Location: /book-of-friends-php-component/register'); 
+            header('Location: /book-of-friends-php-component/registerShow'); 
             die();
         }
         catch (\Delight\Auth\UserAlreadyExistsException $e) {
             flash()->error('User already exists');
-            header('Location: /book-of-friends-php-component/register'); 
+            header('Location: /book-of-friends-php-component/registerShow'); 
             die();
         }
         catch (\Delight\Auth\TooManyRequestsException $e) {
             flash()->error('Too many requests');
-            header('Location: /book-of-friends-php-component/register'); 
+            header('Location: /book-of-friends-php-component/registerShow'); 
             die();
         }
-        }
-        
         echo $this->templates->render('register', ['name' => 'Register user!']);    
     }
 
@@ -85,33 +91,37 @@ class UserController{
 
     public function email_verification(){
        
-        echo $this->templates->render('email_varification', ['name' => 'User email verification!']);
+        //echo $this->templates->render('email_varification', ['name' => 'User email verification!']);
 
         if(!empty($_POST)){
             try {
             $this->auth->confirmEmail($_POST['code'], $_POST['tokin']);
             flash()->error('Email address has been verified');
+            header('Location: /book-of-friends-php-component/login');
         }
         catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
             flash()->error('Invalid token');
+            header('Location: /book-of-friends-php-component/verification');
             die();
         }
         catch (\Delight\Auth\TokenExpiredException $e) {
             flash()->error('Token expired');
-
+            header('Location: /book-of-friends-php-component/verification');
             die();
         }
         catch (\Delight\Auth\UserAlreadyExistsException $e) {
             flash()->error('Email address already exists');
-
+            header('Location: /book-of-friends-php-component/verification');
             die();
         }
         catch (\Delight\Auth\TooManyRequestsException $e) {
             flash()->error('Too many requests');
-
+            header('Location: /book-of-friends-php-component/verification');
             die();
         }
-        }    
+        } 
+        
+        echo $this->templates->render('email_varification', ['name' => 'User email verification!']);
     }
 
 
@@ -309,55 +319,58 @@ class UserController{
 
 
     public function deleteShow($vars){
-        $id = $vars['id'];
-        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) OR $_SESSION['confirm'] == true  OR $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER)){
-             
-            flash()->warning('Вы действительно хотите удалить пользователя?');
-            $user=$this->qb->getUser($id,'users');
-            echo $this->templates->render('delete', ['name'=>'delete', 'user' => $user]); 
-        }
-        else{
-            header('Location: /book-of-friends-php-component/confirm_password/'.$id); die;
-        }
-        
+        $id = $vars['id'];     
+        flash()->warning('Вы действительно хотите удалить пользователя?');
+        $user=$this->qb->getUser($id,'users');
+        echo $this->templates->render('delete', ['name'=>'delete', 'user' => $user]);     
     }
-
 
 
 
 
     public function delete($vars){
         $id = $vars['id'];
-                
-        try {
-        $this->auth->admin()->deleteUserById($id);
-        $this->mb->deleteFileAvatar($id);
-        flash()->success('Вы успешно удалили пользователя');
-        unset($_SESSION['confirm_password']);
-            if($this->auth->hasRole(\Delight\Auth\Role::ADMIN)   OR $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER)){
-                header('Location: /book-of-friends-php-component/home'); 
-                die();
+        $userAuthId = $this->auth->getUserId();
+        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) OR $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) OR($_SESSION['confirm_password'] == true AND $userAuthId == $id)){      
+            try {
+            $this->auth->admin()->deleteUserById($id);
+            $this->mb->deleteFileAvatar($id);
+            flash()->success('Вы успешно удалили пользователя');
+            unset($_SESSION['confirm_password']);
+                if($this->auth->hasRole(\Delight\Auth\Role::ADMIN)   OR $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER)){
+                    header('Location: /book-of-friends-php-component/home'); 
+                    die();
+                }
+                else{
+                    header('Location: /book-of-friends-php-component/logout'); 
+                    die();
+                }
             }
-            else{
-                header('Location: /book-of-friends-php-component/logout'); 
-                die();
-            }
+            catch (\Delight\Auth\UnknownIdException $e) {
+            flash()->warning('Unknown ID'); 
+            header('Location: /book-of-friends-php-component/deleteShow/'.$id); die;
+            }   
         }
-        catch (\Delight\Auth\UnknownIdException $e) {
-        flash()->warning('Unknown ID'); 
-        header('Location: /book-of-friends-php-component/deleteShow/'.$id); die;
+        else{
+            header('Location: /book-of-friends-php-component/confirm_password/'.$id); die;
         }
-        
-        
     }
     
 
 
 
 
+    public function confirm_passwordShow($vars){
+        $id = $vars['id'];
+        echo $this->templates->render('confirm_password', ['name'=>'confirm_password', 'id' => $id]);  
+    } 
+    
+    
+
+
+
     public function confirm_password($vars){
         $id = $vars['id'];
-        if(isset($_POST['c_password'])){
             try {
                     if ($this->auth->reconfirmPassword($_POST['c_password'])) {
                         flash()->info('The user really seems to be who they claim to be');
@@ -367,19 +380,21 @@ class UserController{
                     }
                     else {
                         flash()->warning('We can\'t say if the user is who they claim to be'); 
-                        header('Location: /book-of-friends-php-component/confirm_password/'.$id);
+                        header('Location: /book-of-friends-php-component/confirm_passwordShow/'.$id);
                         die;    
                     }
             }
             catch (\Delight\Auth\NotLoggedInException $e) {
-                flash()->error('The user is not signed in');  
+                flash()->error('The user is not signed in'); 
+                header('Location: /book-of-friends-php-component/confirm_passwordShow/'.$id);
+                die;
             }
             catch (\Delight\Auth\TooManyRequestsException $e) {
-                flash()->error('Too many requests');  
-            }
-        } 
-        echo $this->templates->render('confirm_password', ['name'=>'confirm_password']);  
-}    
+                flash()->error('Too many requests');
+                header('Location: /book-of-friends-php-component/confirm_passwordShow/'.$id);
+                die;  
+            }     
+    }    
     
     
 

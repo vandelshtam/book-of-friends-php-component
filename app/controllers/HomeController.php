@@ -39,7 +39,7 @@ class HomeController{
 
     public function home(){
         $users=$this->qb->getAll('users'); 
-        echo $this->templates->render('homepage', ['name'=>'All users', 'users' => $users]);   
+        echo $this->templates->render('homepage', ['name'=>'All users', 'users' => $users]);  
     }
 
 
@@ -76,6 +76,8 @@ class HomeController{
             $this->mb->deleteFileAvatar($id);
             $this->mb->loadingFileAvatar($image_name_tmp,$direct,$new_avatar);
             $this->mb->updateAvatar($data,$id,'users');
+            flash()->success('Вы успешно обновили свой аватар');
+           // header('Location: /book-of-friends-php-component/home');  
             
         }
         elseif(isset($_POST['send_delete'])){

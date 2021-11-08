@@ -40,16 +40,16 @@ $containerBuilder->addDefinitions([
 $container = $containerBuilder->build();
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/book-of-friends-php-component/home', ['App\controllers\HomeController','home']);
-    $r->addRoute('GET', '/book-of-friends-php-component/page_profile/{id:\d+}', ['App\controllers\HomeController','page_profile']);
+    $r->addRoute('GET', '/', ['App\controllers\HomeController','home']);
+    $r->addRoute('GET', '/page_profile/{id:\d+}', ['App\controllers\HomeController','page_profile']);
     $r->addRoute('GET', '/book-of-friends-php-component/edit_user/{id:\d+}', ['App\controllers\UserController','edit']);
     $r->addRoute('POST', '/book-of-friends-php-component/edit_user/{id:\d+}', ['App\controllers\UserController','edit']);
     $r->addRoute('GET', '/book-of-friends-php-component/register', ['App\controllers\UserController','register']);
     $r->addRoute('POST', '/book-of-friends-php-component/register', ['App\controllers\UserController','register']);
     $r->addRoute('GET', '/book-of-friends-php-component/registerShow', ['App\controllers\UserController','registerShow']);
     $r->addRoute('POST', '/book-of-friends-php-component/registerShow', ['App\controllers\UserController','registerShow']);
-    $r->addRoute('GET', '/book-of-friends-php-component/verification', ['App\controllers\UserController','email_verification']);
-    $r->addRoute('POST', '/book-of-friends-php-component/verification', ['App\controllers\UserController','email_verification']);
+    $r->addRoute('GET', '/book-of-friends-php-component/verification/{id:\d+}', ['App\controllers\UserController','email_verification']);
+    $r->addRoute('POST', '/book-of-friends-php-component/verification/{id:\d+}', ['App\controllers\UserController','email_verification']);
     $r->addRoute('GET', '/book-of-friends-php-component/login', ['App\controllers\UserController','login']);
     $r->addRoute('POST', '/book-of-friends-php-component/login', ['App\controllers\UserController','login']);
     $r->addRoute('GET', '/book-of-friends-php-component/logout', ['App\controllers\UserController','logout']);

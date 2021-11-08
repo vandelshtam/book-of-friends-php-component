@@ -4,10 +4,9 @@ $pdo = new PDO("mysql:host=localhost:8889; dbname=app3; charset=utf8;","root","r
 $auth = new \Delight\Auth\Auth($pdo);
 ?>
 
-    <main id="js-page-content" role="main" class="page-content mt-6">
-    <br><br> 
-    <?php echo flash()->display();?>
-            <div class="row mt-6 sticky-top mt-6">
+    <main id="js-page-content" role="main" class="page-content mt-0">
+    
+            <div class="row mt-6 sticky-top mt-0">
                 <div class="col-xl-12">
                     <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER)):?>
                     <a class="btn btn-dark text-white" style="border-radius: 10px;"  href="/book-of-friends-php-component/addUser">Добавить</a>
@@ -68,17 +67,17 @@ $auth = new \Delight\Auth\Auth($pdo);
                                                     
                                                         <div class="dropdown-menu " style="border-radius: 25px; background-color: rgb(200 200 200); z-index: 1075;">
                                                                         <?php if($auth->isLoggedIn()):?>
-                                                                        <a class="dropdown-item" href="/book-of-friends-php-component/page_profile/<?=$user['id'];?>">
+                                                                        <a class="dropdown-item" href="/page_profile/<?=$user['id'];?>">
                                                                             <i class="fa fa-edit"></i>
                                                                             Открыть профиль</a> 
                                                                             <?php endif;?> 
                                                                             <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER)):?> 
-                                                                            <a class="dropdown-item" href="/book-of-friends-php-component/roles/<?=$user['id'];?>">
+                                                                            <a class="dropdown-item" href="/roles/<?=$user['id'];?>">
                                                                             <i class="fa fa-edit"></i>
                                                                             Управлять ролями</a>
                                                                             <?php endif;?>
                                                                             <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER) OR $auth->getUsername()==$user['username']):?> 
-                                                                            <a class="dropdown-item" href="/book-of-friends-php-component/edit_user/<?=$user['id'];?>">
+                                                                            <a class="dropdown-item" href="/edit_user/<?=$user['id'];?>">
                                                                             <i class="fa fa-edit"></i>
                                                                             Редактировать</a>
                                                                             <a class="dropdown-item" href="/book-of-friends-php-component/security_admin/<?=$user['id'];?>">
@@ -116,9 +115,9 @@ $auth = new \Delight\Auth\Auth($pdo);
                                 <div class="card-body p-0 collapse show">
                                     <?php if($auth->isLoggedIn()):?>   
                                                 <div class="p-3">
-                                                    <a href="tel:+13174562564" class="mt-1 d-block fs-sm fw-400 text-dark">
+                                                    <a href="tel:+<?=$user['phone'];?>" class="mt-1 d-block fs-sm fw-400 text-dark">
                                                     <i class="fas fa-mobile-alt text-muted mr-2"></i><?=$user['phone'];?></a>
-                                                    <a href="mailto:oliver.kopyov@smartadminwebapp.com" class="mt-1 d-block fs-sm fw-400 text-dark">
+                                                    <a href="mailto:<?=$user['email'];?>" class="mt-1 d-block fs-sm fw-400 text-dark">
                                                     <i class="fas fa-mouse-pointer text-muted mr-2"></i><?=$user['email'];?></a>
                                                     <address class="fs-sm fw-400 mt-4 text-muted">
                                                     <i class="fas fa-map-pin mr-2"></i><?=$user['city'];?></address>

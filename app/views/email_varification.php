@@ -60,7 +60,7 @@
                             <div class="col-xl-6 ml-auto mr-auto">
                                 <div class="card p-4  bg-faded" style="border-radius: 25px;">
                                     
-                                    <br><br>    <strong>Уведомление!</strong> <?=flash()->display();?>
+                                    <br><br>    <strong>Уведомление!</strong> <?php echo flash()->display();?>
                                     
                                     <form id="js-login" novalidate="" action="" method="POST">
                                         

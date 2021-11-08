@@ -2,8 +2,6 @@
 $pdo = new PDO("mysql:host=localhost:8889; dbname=app3; charset=utf8;","root","root");
 $auth = new \Delight\Auth\Auth($pdo);
  ?>
-<!DOCTYPE html>
-<html lang="en">
 
     <main id="js-page-content" role="main" class="page-content mt-3">
     <br><br><br>

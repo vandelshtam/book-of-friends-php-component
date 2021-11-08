@@ -60,6 +60,7 @@ $auth = new \Delight\Auth\Auth($pdo);
                 </ul>
             </div>
         </nav>
+        <br><br><br><br><br>
             <?php echo flash()->display();?>
             <?=$this->section('content')?>
             <title><?=$this->e($name)?></title>

@@ -9,7 +9,9 @@ use League\Plates\Engine;
 use JasonGrimes\Paginator;
 use App\model\MediaBuilder;
 use App\model\QueryBuilder;
+use App\model\MailBuilder;
 use Tamtamchik\SimpleFlash\Flash;
+
 
 class UserController{
 
@@ -18,7 +20,7 @@ class UserController{
     public $flash;
     private $qb;
     private $mb;
-    
+    private $mailb;
     
 
     public function __construct(
@@ -26,13 +28,15 @@ class UserController{
         Auth $auth, 
         Flash $flash, 
         QueryBuilder $qb,
-        MediaBuilder $mb )
+        MediaBuilder $mb,
+        MailBuilder $mailb)
     {
         $this->auth = $auth;
         $this->templates = $engine;
         $this->flash = $flash;
         $this->qb = $qb;
         $this->mb = $mb;
+        $this->mailb = $mailb;
     }
     
 
@@ -46,21 +50,25 @@ class UserController{
 
 
 
-
     public function register(){
-        
+       
         try {
             $userId = $this->auth->register($_POST['email'],$_POST['password'],$_POST['username'], function ($selector, $token) {
-            echo 'Send ' . $selector . ' and ' . $token . ' to the user (e.g. via email)';
-            flash()->success('Send ' . $selector . ' and ' . $token . ' to the user (e.g. via email)');
+            
+            flash()->success('Sent to the user by email selector: ' . $selector . ' and token: ' . $token . ' to the user');
+            $body_mail = '<b>'.'You have successfully registered, in this email a selector : 
+            ' .$selector. ' and a token :  ' .$token. '  are sent to you. Copy them, follow the link and go through verification: localhost:8888/book-of-friends-php-component/verification"
+            This letter is generated automatically, please do not reply to it. Best regards, administration of the "book-of-friends-php-component" site.'.'</b>' ;
+            $this->mailb->mail_to($_POST['email'], $_POST['username'], $body_mail );
             });
             $data_user = [ 
                 'c' => 'c_'.$userId,
                 'search' => strtolower($_POST['username'])    
                 ];
-                $this->qb->update($data_user, $userId,'users');
-            flash()->success('Вы успешно зарегистрировались, не забудьте пройти  верификацию.');
-            header('Location: /book-of-friends-php-component/verification');        
+            $this->qb->update($data_user, $userId,'users');
+            flash()->success('Sent to the user by email selector and token');
+            header('Location: /book-of-friends-php-component/verification/'.$userId); 
+
         }
         catch (\Delight\Auth\InvalidEmailException $e) {
             flash()->error('Invalid email address');
@@ -82,41 +90,43 @@ class UserController{
             header('Location: /book-of-friends-php-component/registerShow'); 
             die();
         }
-        echo $this->templates->render('register', ['name' => 'Register user!']);    
+        echo $this->templates->render('register', ['name' => 'Register user!', 'id' => $userId]);    
     }
 
 
 
+    
 
-
-    public function email_verification(){
-       
-        //echo $this->templates->render('email_varification', ['name' => 'User email verification!']);
-
+    public function email_verification($vars){
+        $id = $vars['id'];
         if(!empty($_POST)){
             try {
             $this->auth->confirmEmail($_POST['code'], $_POST['tokin']);
-            flash()->error('Email address has been verified');
+            flash()->success('Email address has been verified');
+            $user=$this->qb->getUser($id,'users');
+            $body_mail = '<b>'.'You have successfully passed the verification, your login is:' .$user['email'].' '.'</b>' ;
+            $this->mailb->mail_to($user['email'], $user['username'], $body_mail );
             header('Location: /book-of-friends-php-component/login');
         }
+        
         catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
             flash()->error('Invalid token');
-            header('Location: /book-of-friends-php-component/verification');
+            header('Location: /book-of-friends-php-component/verification/'.$id);
             die();
         }
         catch (\Delight\Auth\TokenExpiredException $e) {
             flash()->error('Token expired');
-            header('Location: /book-of-friends-php-component/verification');
+            header('Location: /book-of-friends-php-component/verification/'.$id);
             die();
         }
         catch (\Delight\Auth\UserAlreadyExistsException $e) {
             flash()->error('Email address already exists');
-            header('Location: /book-of-friends-php-component/verification');
+            header('Location: /book-of-friends-php-component/verification/'.$id);
             die();
         }
         catch (\Delight\Auth\TooManyRequestsException $e) {
             flash()->error('Too many requests');
-            header('Location: /book-of-friends-php-component/verification');
+            header('Location: /book-of-friends-php-component/verification/'.$id);
             die();
         }
         } 
@@ -142,25 +152,32 @@ class UserController{
         if(isset($_POST['login'])){
         try {
                 $this->auth->login($_POST['email'], $_POST['password'], $rememberDuration);
-                flash()->success('User is logged in');
-                header('Location: /book-of-friends-php-component/home'); 
+                //flash()->success('User is logged in');
+                //header('Location: /book-of-friends-php-component/home'); 
             }
+           
             catch (\Delight\Auth\InvalidEmailException $e) {
                 flash()->warning('Wrong email address');
-                //die();
+                header('Location: /book-of-friends-php-component/login'); 
+                die();
             }
             catch (\Delight\Auth\InvalidPasswordException $e) {
                 flash()->warning('Wrong password');
-                //die();
+                header('Location: /book-of-friends-php-component/login'); 
+                die();
             }
             catch (\Delight\Auth\EmailNotVerifiedException $e) {
                 flash()->error('Email not verified');
-                //die();
+                header('Location: /book-of-friends-php-component/login'); 
+                die();
             }
             catch (\Delight\Auth\TooManyRequestsException $e) {
                 flash()->error('Too many requests');
-                //die();
-            }     
+                header('Location: /book-of-friends-php-component/login'); 
+                die();
+            } 
+            flash()->success('User is logged in');
+            header('Location: /book-of-friends-php-component/home');     
         }
         echo $this->templates->render('login', ['name' => 'User login!']); 
     }
@@ -175,7 +192,7 @@ class UserController{
         $list_statuses=[0 => 'online', 1 => 'walked away', 2 => 'do not disturb'];
         $list_statuses_set=[ 'online' => 0,  'walked away' => 1,  'do not disturb' => 2];
 
-        if(($_POST['send']) !=null){
+        if(!empty($_POST['username']) != null OR !empty($_POST['city']) !=null  OR !empty($_POST['phone']) != null OR !empty($_POST['occupation']) != null OR !empty($_POST['vk']) != null OR !empty($_POST['telegram']) != null OR !empty($_POST['instagram']) != null OR !empty($_POST['status']) != null){
             
             $data_user = [                    
                 'username' => $_POST['username'],
@@ -195,13 +212,15 @@ class UserController{
             $this->qb->update($data_status,$id,'users');
             $user=$this->qb->getUser($id,'users');
             flash()->success('Вы успешно обновили профиль'); 
-            header('Location: /book-of-friends-php-component/home');     
+            header('Location: /book-of-friends-php-component/home'); 
+               
         }
-        if(!empty($_POST)){
+        if(empty($_POST['username'])  AND empty($_POST['city'])  AND empty($_POST['phone'])   AND empty($_POST['occupation'])  AND empty($_POST['vk'])   AND empty($_POST['telegram'])   AND empty($_POST['instagram'])   AND empty($_POST['status']) ){
             flash()->info('Вы не внесли изменений,если не хотите вносить изменения перейдите на главную страницу.'); 
         }
             $user=$this->qb->getUser($id,'users');
-            echo $this->templates->render('edit', ['name'=>'Edit profile', 'list_statuses' => $list_statuses, 'user' => $user ]);    
+            echo $this->templates->render('edit', ['name'=>'Edit profile', 'list_statuses' => $list_statuses, 'user' => $user ]); 
+               
     }
 
 
@@ -232,7 +251,7 @@ class UserController{
                         'instagram' => $_POST['instagram'],
                         'occupation' => $_POST['occupation']   
                     ];
-                    var_dump($userId);
+                    
                     $this->qb->update($data, $userId,'users');
                     }
         
@@ -311,7 +330,7 @@ class UserController{
             flash()->success('Вы успешно имзменили роль пользователя');        
         }
         $role_mask=$this->auth->admin()->getRolesForUserById($id);
-        echo $this->templates->render('roles', ['name'=>'roles',  'role_statuses' => $role_statuses,  'role_mask' => $role_mask]);
+        echo $this->templates->render('roles', ['name'=>'roles',  'role_statuses' => $role_statuses,  'role_mask' => $role_mask, 'id' => $id]);
     }
 
 

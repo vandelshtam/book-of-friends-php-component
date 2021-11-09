@@ -56,6 +56,17 @@ class HomeController{
     public function page_profile($vars){
         
         $id = $vars['id'];
+        $userAuthId = $this->auth->getUserId();
+        if($userAuthId == false){
+            flash()->error('Такого пользователя нет');
+                header('Location: /'); 
+                die();
+        }
+        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) == false && $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) == false &&   $userAuthId != $id){
+            flash()->error('У вас нет прав доступа');
+                header('Location: /'); 
+                die();
+        }
         $user=$this->qb->getUser($id,'users');
         echo $this->templates->render('page_profile', ['name'=>'Page profile', 'user' => $user, 'ses'=>\Delight\Cookie\Session::set('username', $this->auth->getUsername())]);   
     }
@@ -66,6 +77,17 @@ class HomeController{
     public function avatar($vars){
         
         $id = $vars['id'];
+        $userAuthId = $this->auth->getUserId();
+        if($userAuthId == false){
+            flash()->error('Такого пользователя нет');
+                header('Location: /'); 
+                die();
+        }
+        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) == false && $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) == false &&   $userAuthId != $id){
+            flash()->error('У вас нет прав доступа');
+                header('Location: /'); 
+                die();
+        }
         $direct='/Applications/MAMP/htdocs/book-of-friends-php-component/public/uploads/';
         
         if(isset($_POST['send_update'])){
@@ -127,7 +149,19 @@ class HomeController{
 
 
     public function status($vars){
+        
         $id = $vars['id'];
+        $userAuthId = $this->auth->getUserId();
+        if($userAuthId == false){
+            flash()->error('Такого пользователя нет');
+                header('Location: /'); 
+                die();
+        }
+        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) == false && $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) == false &&   $userAuthId != $id){
+            flash()->error('У вас нет прав доступа');
+                header('Location: /'); 
+                die();
+        }
         $list_statuses_set=[ 'online' => 0,  'walked away' => 1,  'do not disturb' => 2];              
         
             $status_key = $list_statuses_set[$_POST['status']];

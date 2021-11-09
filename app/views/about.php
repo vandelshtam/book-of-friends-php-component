@@ -12,25 +12,25 @@
     <!-- Remove Tap Highlight on Windows Phone IE -->
     <meta name="msapplication-tap-highlight" content="no">
     <!-- base css -->
-    <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="/php/lessons_php/module_2/module_2_training_project/app/views/css/vendors.bundle.css">
-    <link id="appbundle" rel="stylesheet" media="screen, print" href="/php/lessons_php/module_2/module_2_training_project/app/views/css/app.bundle.css">
+    <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="/book-of-friends-php-component/app/views/css/vendors.bundle.css">
+    <link id="appbundle" rel="stylesheet" media="screen, print" href="/book-of-friends-php-component/app/views/css/app.bundle.css">
     <link id="mytheme" rel="stylesheet" media="screen, print" href="#">
-    <link id="myskin" rel="stylesheet" media="screen, print" href="/php/lessons_php/module_2/module_2_training_project/app/views/css/skins/skin-master.css">
+    <link id="myskin" rel="stylesheet" media="screen, print" href="/book-of-friends-php-component/app/views/css/skins/skin-master.css">
     <!-- Place favicon.ico in the root directory -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/php/lessons_php/module_2/module_2_training_project/app/views/img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/php/lessons_php/module_2/module_2_training_project/app/views/img/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/book-of-friends-php-componentapp/views/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/book-of-friends-php-component/app/views/img/favicon/favicon-32x32.png">
     <link rel="mask-icon" href="/php/lessons_php/module_2/module_2_training_project/app/views/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="stylesheet" media="screen, print" href="/php/lessons_php/module_2/module_2_training_project/app/views/css/fa-brands.css">
+    <link rel="stylesheet" media="screen, print" href="/book-of-friends-php-component/app/views/css/fa-brands.css">
 </head>
 <body>
     <div class="page-wrapper auth">
-        <div class="page-inner bg-brand-gradient">
+        <div class="page-inner bg-secondary bg-primary-gradient">
             <div class="page-content-wrapper bg-transparent m-0">
-                <div class="height-10 w-100 shadow-lg px-4 bg-brand-gradient">
+                <div class="height-10 w-100 shadow-lg px-4 bg-dark bg-dark-gradient">
                     <div class="d-flex align-items-center container p-0">
                         <div class="page-logo width-mobile-auto m-0 align-items-center justify-content-center p-0 bg-transparent bg-img-none shadow-0 height-9 border-0">
                             <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
-                                <img src="/book-of-friends-php-component/app/views/img/type2.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
+                                <img src="/type2.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
                                 <span class="page-logo-text mr-1">About</span>
                             </a>
                         </div>
@@ -47,14 +47,14 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <h2 class="fs-xxl fw-500 mt-4 text-white text-center">
-                                    Проект по итогам изучения раздела "Уровень 3, Модуль 2, Готовые компоненты"
+                                    Проект по итогам изучения готовых компонентов php
                                     <small class="h3 fw-300 mt-3 mb-5 text-white opacity-60 hidden-sm-down">
-                                        В этом учебном проекте реализованы и закреплены знания создания кода с использованием готовых компонентов PHP.
-                                        <br> 
-                                        
-                                        
+                                        В этом учебном проекте реализованы и закреплены знания создания кода с использованием готовых компонентов c  <a href="https://packagist.org/" class="text-white">packagist.org</a> 
+                                        <br>    
                                     </small>
+                                    
                                 </h2>
+                                
                             </div>
                             
                         </div>
@@ -64,24 +64,6 @@
         </div>
     </div>
     
-    <script src="/php/lessons_php/module_2/module_2_training_project/app/views/js/vendors.bundle.js"></script>
-    <script>
-        $("#js-login-btn").click(function(event)
-        {
-
-            // Fetch form to apply custom Bootstrap validation
-            var form = $("#js-login")
-
-            if (form[0].checkValidity() === false)
-            {
-                event.preventDefault()
-                event.stopPropagation()
-            }
-
-            form.addClass('was-validated');
-            // Perform ajax submit here...
-        });
-
-    </script>
+    <script src="/book-of-friends-php-component/app/views/js/vendors.bundle.js"></script>
 </body>
 </html>

@@ -242,9 +242,7 @@ class UserController{
 
     public function addUser(){
       
-        $userAuthId = $this->auth->getUserId();
-        
-        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) == false && $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) == false &&   $userAuthId != $id){
+        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) == false && $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) == false){
             flash()->error('У вас нет прав доступа');
                 header('Location: /'); 
                 die();
@@ -331,6 +329,17 @@ class UserController{
 
     public function roles($vars){
         $id = $vars['id'];
+        $user = $this -> qb -> getUser($id, 'users');
+        if($user['role'] == 1){
+            flash()->error('Вы не можете  изменить роль пользователя обратитесь к разработчикам');
+            header('Location: /'); 
+            die();
+        }
+        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) == false && $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) == false){
+            flash()->error('У вас нет прав доступа');
+                header('Location: /'); 
+                die();
+        }
         $role_mask=$this->auth->admin()->getRolesForUserById($id);
         $role_statuses = ['ADMIN' ,'DEVELOPER' , 'revoke the administrator role', 'revoke the developer role', 'MODERATOR', 'revoke the moderator role', 'SUPER_ADMIN','revoke the super_admin role'];
                      
@@ -378,10 +387,20 @@ class UserController{
 
 
 
-
     public function delete($vars){
         $id = $vars['id'];
         $userAuthId = $this->auth->getUserId();
+        $user = $this -> qb -> getUser($id, 'users');
+        if($user['roles_mask'] == 1 || $user['roles_mask'] == 262144  || $user['roles_mask'] == 262145){
+            flash()->error('Вы не можете удалить пользователя обратитесь к разработчикам');
+            header('Location: /'); 
+            die();
+        }
+        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) == false && $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) == false  &&   $userAuthId != $id){
+            flash()->error('У вас нет прав доступа');
+                header('Location: /'); 
+                die();
+        }
         if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) OR $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) OR($_SESSION['confirm_password'] == true AND $userAuthId == $id)){      
             try {
             $this->auth->admin()->deleteUserById($id);
@@ -456,6 +475,13 @@ class UserController{
 
     public function security_admin(){
 
+
+        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) == false && $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) == false){
+            flash()->error('У вас нет прав доступа');
+                header('Location: /'); 
+                die();
+        }
+
         if(isset($_POST['username']) AND isset($_POST['newPassword'])){
             try {
             $this->auth->admin()->changePasswordForUserByUsername($_POST['username'], $_POST['newPassword']);
@@ -488,7 +514,13 @@ class UserController{
 
     public function security($vars){
         $id = $vars['id'];
+        $userAuthId = $this->auth->getUserId();
         $user = $this->qb->getUser($id,'users');
+        if($this->auth->hasRole(\Delight\Auth\Role::ADMIN) == false && $this->auth->hasRole(\Delight\Auth\Role::DEVELOPER) == false &&   $userAuthId != $id){
+            flash()->error('У вас нет прав доступа');
+                header('Location: /'); 
+                die();
+        }
         if(isset($_POST['email']) AND isset($_POST['username']) AND isset($_POST['password']) AND isset($_POST['confirm'])){
             
             if($user == false){
@@ -538,7 +570,6 @@ class UserController{
     public function logout(){
         $this->auth->logOut();
         $this->auth->destroySession();
-       // unset($_SESSION());
         flash()->success('Вы успешно вышли из своего аккаунта');
         header('Location: /');
         die();

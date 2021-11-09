@@ -112,7 +112,7 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="vk" value="<?php if(!empty($_POST['vk'])) {echo $_POST['vk'];} ?>">
+                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="vk" value="<?php if(!empty($_SESSION['add']['vk'])) {echo $_SESSION['add']['vk'];} ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -126,7 +126,7 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="telegram" value="<?php if(!empty($_POST['telegram'])) {echo $_POST['telegram'];} ?>">
+                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="telegram" value="<?php if(!empty($_SESSION['add']['telegram'])) {echo $_SESSION['add']['telegram'];} ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -140,7 +140,7 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="instagram" value="<?php if(!empty($_POST['instagram'])) {echo $_POST['instagram'];} ?>">
+                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="instagram" value="<?php if(!empty($_SESSION['add']['instagram'])) {echo $_SESSION['add']['instagram'];} ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-3 d-flex flex-row-reverse">

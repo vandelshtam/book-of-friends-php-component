@@ -1,9 +1,9 @@
-<?php $this->layout('layout', ['title' => 'About']) ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    
+    <title>About</title>
     <meta name="description" content="Login">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
@@ -37,7 +37,7 @@
                         <span class="text-white opacity-50 ml-auto mr-2 hidden-sm-down">
                             Уже зарегистрированы?
                         </span>
-                        <a href="/php/lessons_php/module_2/module_2_training_project/public/index.php/login" class="btn-link text-white ml-auto ml-sm-0">
+                        <a href="/login" class="btn-link text-white ml-auto ml-sm-0">
                             Войти
                         </a>
                     </div>

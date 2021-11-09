@@ -8,7 +8,7 @@
             </h1>
 
         </div>
-        <form action="/book-of-friends-php-component/status/<?=$id;?>" method="POST">
+        <form action="/status/<?=$id;?>" method="POST">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel" style="border-radius: 25px; background-color: rgb(220 220 220)" >

@@ -20,11 +20,14 @@ class MediaBuilder{
         $this->qb = $qb;
     }
 
+
     
     public function loadingFileAvatar($image_name_tmp,$direct,$image_name){
         is_uploaded_file($image_name_tmp);
         move_uploaded_file($image_name_tmp, $direct.$image_name );
     }
+
+
 
     public function hisAvatar($id, $table){
         
@@ -37,15 +40,20 @@ class MediaBuilder{
             return false;
         }    
     }
-        
+     
+    
+
     public function deleteFileAvatar($id){
           
         $user=$this->qb->getUser($id,'users');
         if($user['avatar']!=null and $user['avatar'] != 'avatar-m.png')
         {
             unlink('uploads/'.$user['avatar']);
-        }    
+        } 
     }
+
+
+
 
     public function updateAvatar($data, $id, $table){
         $this->qb->update($data,$id,$table);   
@@ -57,14 +65,5 @@ class MediaBuilder{
         return $avatar;
 
     }
-
-
-
-
-
-    
-    
-    
-
     
 }

@@ -26,18 +26,18 @@
     <div class="page-wrapper auth">
         <div class="page-inner bg-secondary bg-secondary-gradient">
             <div class="page-content-wrapper bg-transparent m-0">
-                <div class="height-10 w-100 shadow-lg px-4 navBackground">
+                <div class="height-10 w-100 shadow-lg px-4 navBackground" style="background-color: rgb(0 0 0);">
                     <div class="d-flex align-items-center container p-0">
                         <div class="page-logo width-mobile-auto m-0 align-items-center justify-content-center p-0 bg-transparent bg-img-none shadow-0 height-9 border-0">
-                            <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
-                                <img src="/book-of-friends-php-component/app/views/img/type2.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
+                            <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center" href="/registerShow">
+                                <img src="/type2.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
                                 <span class="page-logo-text mr-1">Book-of-friends</span>
                             </a>
                         </div>
                         <span class="text-white opacity-50 ml-auto mr-2 hidden-sm-down">
                             Уже зарегистрированы?
                         </span>
-                        <a href="/book-of-friends-php-component/login" class="btn-link text-white ml-auto ml-sm-0">
+                        <a href="/login" class="btn-link text-white ml-auto ml-sm-0">
                             Войти
                         </a>
                     </div>
@@ -59,7 +59,7 @@
                                 <div class="card p-4  bg-faded" style="border-radius: 25px;">
                                     <br><br>
                                         <strong class="rounded-plus"><?php echo flash()->display();?></strong> 
-                                    <form id="js-login" novalidate="" action="/book-of-friends-php-component/register" method="POST">
+                                    <form id="js-login" novalidate="" action="/register" method="POST">
                                         <div class="form-group">
                                             <label class="form-label" for="emailverify">Email</label>
                                             <input type="email" id="emailverify" class="form-control rounded-plus" placeholder="Эл. адрес" name="email" value="<?php if(!empty($_POST['email'])) {echo $_POST['email'];} ?>" required>

@@ -105,7 +105,11 @@ class QueryBuilder{
                 $result = $sth->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
     }
-        
+      
+    public function lastId(){
+        $result = $this->pdo->lastInsertId();
+        return $result;
+    }
     
 
 }

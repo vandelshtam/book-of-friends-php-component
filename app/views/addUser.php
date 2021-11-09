@@ -1,7 +1,7 @@
 <?php $this->layout('layout', ['title' => 'Add user']); ?>
 
 
-                            <strong>Уведомление!</strong> <?php echo flash()->display();?>
+                            
                         
     <main id="js-page-content" role="main" class="page-content mt-3">
         <div class="subheader">
@@ -9,37 +9,37 @@
                 <i class='subheader-icon fal fa-plus-circle'></i> Добавить пользователя
             </h1>
         </div>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="/addUser" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xl-6">
-                    <div id="panel-1" class="panel">
-                        <div class="panel-container">
-                            <div class="panel-hdr">
+                    <div id="panel-1" class="panel" style="border-radius: 25px; background-color: rgb(220 220 220)">
+                        <div class="panel-container" style="border-radius: 25px; background-color: rgb(220 220 220)">
+                            <div class="panel-hdr" style="border-radius: 25px; background-color: rgb(220 220 220)">
                                 <h2>Общая информация</h2>
                             </div>
                             <div class="panel-content">
                                 <!-- username -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Имя</label>
-                                    <input type="text" id="simpleinput" class="form-control" name="username">
+                                    <input type="text" id="simpleinput" class="form-control rounded-plus" name="username" value="<?php if(!empty($_SESSION['add']['username'])) {echo $_SESSION['add']['username'];} ?>">
                                 </div>
 
                                 <!-- title -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Место работы</label>
-                                    <input type="text" id="simpleinput" class="form-control" name="occupation">
+                                    <input type="text" id="simpleinput" class="form-control rounded-plus" name="occupation" value="<?php if(!empty($_SESSION['add']['occupation'])) {echo $_SESSION['add']['occupation'];} ?>">
                                 </div>
 
                                 <!-- tel -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Номер телефона</label>
-                                    <input type="text" id="simpleinput" class="form-control" name="phone">
+                                    <input type="text" id="simpleinput" class="form-control rounded-plus" name="phone" value="<?php if(!empty($_SESSION['add']['phone'])) {echo $_SESSION['add']['phone'];} ?>">
                                 </div>
 
                                 <!-- address -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Город</label>
-                                    <input type="text" id="simpleinput" class="form-control" name="city" >
+                                    <input type="text" id="simpleinput" class="form-control rounded-plus" name="city" value="<?php if(!empty($_SESSION['add']['city'])) {echo $_SESSION['add']['city'];} ?>">
                                 </div>
                             </div>
                         </div>
@@ -47,29 +47,29 @@
                     </div>
                 </div>
                 <div class="col-xl-6">
-                    <div id="panel-1" class="panel">
-                        <div class="panel-container">
-                            <div class="panel-hdr">
+                    <div id="panel-1" class="panel" style="border-radius: 25px; background-color: rgb(220 220 220)">
+                        <div class="panel-container" style="border-radius: 25px; background-color: rgb(220 220 220)">
+                            <div class="panel-hdr" style="border-radius: 25px; background-color: rgb(220 220 220)">
                                 <h2>Безопасность и Медиа</h2>
                             </div>
                             <div class="panel-content">
                                 <!-- email -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input type="text" id="simpleinput" class="form-control" name="email">
+                                    <input type="email" id="simpleinput" class="form-control rounded-plus" name="email" value="<?php if(!empty($_SESSION['add']['email'])) {echo $_SESSION['add']['email'];} ?>">
                                 </div>
 
                                 <!-- password -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Пароль</label>
-                                    <input type="password" id="simpleinput" class="form-control" name="password">
+                                    <input type="password" id="simpleinput" class="form-control rounded-plus" name="password">
                                 </div>
 
                                 
                                 <!-- status -->
                                 <div class="form-group">
                                     <label class="form-label" for="example-select">Выберите статус</label>
-                                    <select class="form-control" id="example-select" name="status">
+                                    <select class="form-control rounded-plus" id="example-select" name="status">
                                         <option>online</option>
                                         <option>walked away</option>
                                         <option>do not disturb</option>
@@ -94,9 +94,9 @@
                 </div>
 
                 <div class="col-xl-12">
-                    <div id="panel-1" class="panel">
-                        <div class="panel-container">
-                            <div class="panel-hdr">
+                    <div id="panel-1" class="panel" style="border-radius: 25px; background-color: rgb(220 220 220)">
+                        <div class="panel-container" style="border-radius: 25px; background-color: rgb(220 220 220)">
+                            <div class="panel-hdr" style="border-radius: 25px; background-color: rgb(220 220 220)">
                                 <h2>Социальные сети</h2>
                             </div>
                             <div class="panel-content">
@@ -112,7 +112,7 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="vk">
+                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="vk" value="<?php if(!empty($_POST['vk'])) {echo $_POST['vk'];} ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -126,25 +126,25 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="telegram">
+                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="telegram" value="<?php if(!empty($_POST['telegram'])) {echo $_POST['telegram'];} ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <!-- instagram -->
                                         <div class="input-group input-group-lg bg-white shadow-inset-2 mb-2">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text bg-transparent border-right-0 py-1 px-3">
+                                                <span class="input-group-text bg-transparent  border-right-0 py-1 px-3" >
                                                     <span class="icon-stack fs-xxl">
                                                         <i class="base-7 icon-stack-3x" style="color:#E1306C"></i>
                                                         <i class="fab fa-instagram icon-stack-1x text-white"></i>
                                                     </span>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="instagram">
+                                            <input type="text" class="form-control border-left-0 bg-transparent pl-0" name="instagram" value="<?php if(!empty($_POST['instagram'])) {echo $_POST['instagram'];} ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                        <button class="btn btn-success" name="send">Добавить</button>
+                                        <button class="btn btn-dark rounded-plus" name="send">Добавить</button>
                                     </div>
                                 </div>
                             </div>

@@ -12,7 +12,7 @@
             <div class="row">
               <div class="col-lg-6 col-xl-6 m-auto">
                     <!-- profile summary -->
-                    <div class="card mb-g rounded-top">
+                    <div class="card mb-g " style="border-radius: 25px; background-color: rgb(220 220 220)">
                         <div class="row no-gutters row-grid">
                             <div class="col-12">
                                 <div class="d-flex flex-column align-items-center justify-content-center p-4">
@@ -52,9 +52,9 @@
             </div>
 
             
-            <form action="/book-of-friends-php-component/confirm_passwordShow/<?=$user['id']?>" method="POST"  md-0>
+            <form action="/confirm_passwordShow/<?=$user['id']?>" method="POST"  md-0>
                <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                        <button class="btn btn-warning" name="delete_user">Удалить пользователя и его профиль</button>                    
+                        <button class="btn btn-warning rounded-plus" name="delete_user">Удалить пользователя и его профиль</button>                    
                 </div>
                </form>
         </main>

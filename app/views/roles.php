@@ -22,10 +22,10 @@ $auth = new \Delight\Auth\Auth($pdo);
                                                 
                                                     <div class="dropdown-menu " style="border-radius: 25px; background-color: rgb(200 200 200); z-index: 1075;">
                                                                     <?php if($auth->isLoggedIn()):?>
-                                                                    <a class="dropdown-item" href="/book-of-friends-php-component/home">
+                                                                    <a class="dropdown-item" href="/">
                                                                         <i class="fa fa-edit"></i>
                                                                         Перейти на главную</a> 
-                                                                    <a class="dropdown-item" href="/book-of-friends-php-component/page_profile/<?=$id;?>">
+                                                                    <a class="dropdown-item" href="/page_profile/<?=$id;?>">
                                                                         <i class="fa fa-edit"></i>
                                                                         Перейти к профилю</a> 
                                                                         <?php endif;?>                         

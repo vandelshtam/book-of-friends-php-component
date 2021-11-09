@@ -24,11 +24,11 @@
     <link rel="stylesheet" media="screen, print" href="/book-of-friends-php-component/app/views/css/page-login-alt.css">
     <link rel="stylesheet" type="text/css" href="/book-of-friends-php-component/app/views/css/style.css">  
 </head>
-<body class="bodyRegisterBackground">
+<body class="bg-dark bg-dark-gradient">
     <div class="blankpage-form-field">
-        <div class="page-logo m-0 w-100 align-items-center justify-content-center  navBackground" style="border-radius: 20px 20px 0px 0px;">
+        <div class="page-logo m-0 w-100 align-items-center justify-content-center" style="border-radius: 20px 20px 0px 0px; background-color: rgb(0 0 0);">
             <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
-                <img src="/book-of-friends-php-component/app/views/img/type2.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
+                <img src="/type2.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
                 <span class="page-logo-text mr-1">Book-of-friends</span>
                 <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
             </a>

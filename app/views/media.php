@@ -23,10 +23,10 @@ $auth = new \Delight\Auth\Auth($pdo);
                                                 
                                                     <div class="dropdown-menu " style="border-radius: 25px; background-color: rgb(200 200 200); z-index: 1075;">
                                                                     <?php if($auth->isLoggedIn()):?>
-                                                                    <a class="dropdown-item" href="/book-of-friends-php-component/home">
+                                                                    <a class="dropdown-item" href="/">
                                                                         <i class="fa fa-edit"></i>
                                                                         Перейти на главную</a> 
-                                                                    <a class="dropdown-item" href="/book-of-friends-php-component/page_profile/<?=$id;?>">
+                                                                    <a class="dropdown-item" href="/page_profile/<?=$id;?>">
                                                                         <i class="fa fa-edit"></i>
                                                                         Перейти к профилю</a> 
                                                                         <?php endif;?>                         
@@ -50,11 +50,11 @@ $auth = new \Delight\Auth\Auth($pdo);
                             </div>
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <?php if($current_avatar==true) { ;?>
+                                    <?php if($avatar != 'avatar-m.png'):?>
                                     <img src="/book-of-friends-php-component/public/uploads/<?php echo $avatar;?>" alt="" class="img-responsive" width="200">
-                                    <?php } else{ ;?>
-                                    <img src="/book-of-friends-php-component/img/demo/avatars/avatar-m.png" alt="" class="img-responsive" width="200">
-                                    <?php };?>   
+                                    <?php  else:?>
+                                    <img src="/book-of-friends-php-component/app/views/img/demo/avatars/avatar-m.png" alt="" class="img-responsive" width="200">
+                                    <?php endif;?>   
                                 </div>
 
                                 <div class="form-group">
@@ -64,11 +64,11 @@ $auth = new \Delight\Auth\Auth($pdo);
 
 
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button class="btn btn-warning" name="send_update">Загрузить</button>
+                                    <button class="btn btn-warning rounded-plus" name="send_update">Загрузить</button>
                                     
                                 </div>
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button class="btn btn-warning" name="send_delete">Удалить</button>
+                                    <button class="btn btn-warning rounded-plus" name="send_delete">Удалить</button>
                                     
                                 </div>
                             </div>

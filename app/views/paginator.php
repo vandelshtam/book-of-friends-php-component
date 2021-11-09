@@ -3,13 +3,12 @@ $this->layout('layout', ['title' => 'List all users']);
 $pdo = new PDO("mysql:host=localhost:8889; dbname=app3; charset=utf8;","root","root");
 $auth = new \Delight\Auth\Auth($pdo);
 ?>
-    <main id="js-page-content" role="main" class="page-content mt-3">
-    <br>
-    <?php echo flash()->display();?>
-            <div class="row mt-6 sticky-top mt-6">
+    <main id="js-page-content" role="main" class="page-content mt-0">
+    
+            <div class="row mt-6 sticky-top mt-0">
                 <div class="col-xl-12">
                     <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER)):?>
-                    <a class="btn btn-dark text-white" style="border-radius: 10px;"  href="/book-of-friends-php-component/addUser">Добавить</a>
+                    <a class="btn btn-dark text-white" style="border-radius: 10px;"  href="/addUser">Добавить</a>
                     <?php else:?>
                     <br><br>
                     <?php endif;?>
@@ -32,7 +31,7 @@ $auth = new \Delight\Auth\Auth($pdo);
                     Список пользователей 
                     <ul class="navbar-nav ml-auto mt-3">   
                     <li class="nav-item" class="row">    
-                        <a class="nav-link text-secondary" href="/book-of-friends-php-component/home">Показывать всех пользователей</a>
+                        <a class="nav-link text-secondary" href="/">Показывать всех пользователей</a>
                     </li> 
                 </ul>   
                 </h1>
@@ -67,33 +66,33 @@ $auth = new \Delight\Auth\Auth($pdo);
                                                     
                                                         <div class="dropdown-menu " style="border-radius: 25px; background-color: rgb(200 200 200); z-index: 1075;">
                                                                         <?php if($auth->isLoggedIn()):?>
-                                                                        <a class="dropdown-item" href="/book-of-friends-php-component/page_profile/<?=$user['id'];?>">
+                                                                        <a class="dropdown-item" href="/page_profile/<?=$user['id'];?>">
                                                                             <i class="fa fa-edit"></i>
                                                                             Открыть профиль</a> 
                                                                             <?php endif;?> 
                                                                             <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER)):?> 
-                                                                            <a class="dropdown-item" href="/book-of-friends-php-component/roles/<?=$user['id'];?>">
+                                                                            <a class="dropdown-item" href="/roles/<?=$user['id'];?>">
                                                                             <i class="fa fa-edit"></i>
                                                                             Управлять ролями</a>
                                                                             <?php endif;?>
                                                                             <?php if($auth->hasRole(\Delight\Auth\Role::SUPER_ADMIN) OR $auth->hasRole(\Delight\Auth\Role::ADMIN) OR $auth->hasRole(\Delight\Auth\Role::DEVELOPER) OR $auth->getUsername()==$user['username']):?> 
-                                                                            <a class="dropdown-item" href="/book-of-friends-php-component/edit_user/<?=$user['id'];?>">
+                                                                            <a class="dropdown-item" href="/edit_user/<?=$user['id'];?>">
                                                                             <i class="fa fa-edit"></i>
                                                                             Редактировать</a>
-                                                                            <a class="dropdown-item" href="/book-of-friends-php-component/security_admin/<?=$user['id'];?>">
+                                                                            <a class="dropdown-item" href="/security_admin/<?=$user['id'];?>">
                                                                             <i class="fa fa-lock"></i>
                                                                             Безопасность</a>
-                                                                            <a class="dropdown-item" href="/book-of-friends-php-component/security/<?=$user['id'];?>">
+                                                                            <a class="dropdown-item" href="/security/<?=$user['id'];?>">
                                                                             <i class="fa fa-lock"></i>
                                                                             Изменить данные пользователя</a>
-                                                                            <a class="dropdown-item" href="/book-of-friends-php-component/status/<?=$user['id'];?>">
+                                                                            <a class="dropdown-item" href="/status/<?=$user['id'];?>">
                                                                             <i class="fa fa-sun"></i>
                                                                             Установить статус</a>
-                                                                            <a class="dropdown-item" href="/book-of-friends-php-component/load_avatar/<?=$user['id'];?>">
+                                                                            <a class="dropdown-item" href="/load_avatar/<?=$user['id'];?>">
                                                                             <i class="fa fa-camera"></i>
                                                                             Управлять аватаром
                                                                             </a>
-                                                                            <a href="/book-of-friends-php-component/deleteShow/<?=$user['id']?>" class="dropdown-item" onclick="return confirm(\'are you sure?\');">
+                                                                            <a href="/deleteShow/<?=$user['id']?>" class="dropdown-item" onclick="return confirm(\'are you sure?\');">
                                                                             <i class="fa fa-window-close"></i>
                                                                             Удалить
                                                                             </a>   
@@ -142,7 +141,7 @@ $auth = new \Delight\Auth\Auth($pdo);
                                                 Войти
                                                 </a>
                                                 <div class="blankpage-footer text-center ml-3 mr-3">
-                                                Нет аккаунта? <a href="/book-of-friends-php-component/register"><strong>Зарегистрироваться</strong>
+                                                Нет аккаунта? <a href="/registerShow"><strong>Зарегистрироваться</strong>
                                                 </div>
                                             </div>     
                                     <?php endif;?> 

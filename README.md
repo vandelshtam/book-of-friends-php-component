@@ -82,7 +82,7 @@ index.php - в нем записаны правила маршрутизации
 - custom_posts.php  - шаблон вида для файлов создания страниц подключаемых контроллером Chats.
 - default.php - шаблон по умолчанию, используется для главной страницы и всех страниц раздела "Пользователи".
 
-## 5. Краткая инструкция для развертывания проекта у себя
+## 4. Краткая инструкция для развертывания проекта у себя
 
 ### Размещение проекта
 
@@ -123,12 +123,21 @@ index.php - в нем записаны правила маршрутизации
 
 ### В проекте приложен файл exampdb.sql из которого можно импортировать таблицы БД
 В таблице БД имеются пользователи проекта с установленными ролями "admin" и "superadmin:
-- otto@otto.
-- viky@viky.
-- morzav@morzav.
-- sandra@sandra.
-- vladi@vladi.
-Пароль у всех перечисленных пользователей 123aaa.
+- otto@mail.ru/ username 'Otto';
+- vlad@mail.ru/ username 'Vlad';
+- ivan@gmail.com/ username 'Ivan';
+- vlada@gmail.com/ username 'Vlada';
+- vandel@gmail.com/ username 'Vandel';
+- slava@gmail.com/ username 'Slava';
+
+Пароль у всех  пользователей 123aaa.
+Все имеют роль 'admin'.
+
+Пользователи :
+- otto@mail.ru/ username 'Otto';
+- vlad@mail.ru/ username 'Vlad';
+- ivan@gmail.com/ username 'Ivan';
+в поле таблицы 'role' имеют значение 1, защита от изменения роли и удаления
 
 Экспортируйте  данные из файла exampdb.aql в phpMyAdmin.
 
